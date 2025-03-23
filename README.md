@@ -38,9 +38,11 @@ neovim # My favorite text editor
 - **`declaro declare <pkg1> <pkg2> ...`**: Declares packages by appending them to `packages.list`
 - **`declaro status <pkg1> <pkg2> ...`**: Shows the status of packages
 
-## Manual Setup
+## Install
 
-1. **Download dependencies:**
+### Manual Installation
+
+1. **Download dependencies: (i.e. Arch Linux)**
     ```bash
     sudo pacman -S bash pacman diffutils sed xargs make sudo coreutils
     ```
