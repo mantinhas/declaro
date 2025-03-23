@@ -12,7 +12,7 @@ setup() {
 
   load "$DIR/../test_helper/bats-support/load"
   load "$DIR/../test_helper/bats-assert/load"
-  load "$DIR/../share/pacmark/utils.sh"
+  load "$DIR/../share/declaro/utils.sh"
   export PATH=$DIR/../bin/:$PATH
   cp $DIR/data/packages.list $DIR/data/packages.list.1
   # Just so it doesn't read the real config file
@@ -51,15 +51,15 @@ pkg4"
 pkg5"
 }
 
-@test "utils: filter_unmarked works" {
-  run filter_unmarkedpkgs "pkg1 pkg2 pkg4 pkg5 pkg6"
+@test "utils: filter_undeclared works" {
+  run filter_undeclaredpkgs "pkg1 pkg2 pkg4 pkg5 pkg6"
   assert_output "\
 pkg5
 pkg6"
 }
 
-@test "utils: filter_marked works" {
-  run filter_markedpkgs "pkg1 pkg2 pkg4 pkg5 pkg6"
+@test "utils: filter_declared works" {
+  run filter_declaredpkgs "pkg1 pkg2 pkg4 pkg5 pkg6"
   assert_output "\
 pkg1
 pkg2
@@ -74,38 +74,38 @@ pkg4"
 -pkg4"
 }
 
-@test "pacmark clean removes and installs packages" {
-  run pacmark clean
+@test "declaro clean removes and installs packages" {
+  run declaro clean
   assert_line -n 0 "The following 1 package(s) are strayed (installed but not declared in packages.list):"
   assert_line -n 1 -e "\spkg5"
   assert_line -n 4 "The following 2 package(s) are missing (declared in packages.list but not installed):"
   assert_line -n 5 -e "\spkg3 pkg4"
 }
 
-@test "pacmark clean does nothing if no packages are strayed or missing" {
+@test "declaro clean does nothing if no packages are strayed or missing" {
   export LIST_COMMAND="echo -e pkg1\npkg2\npkg3\npkg4"
-  run pacmark clean
+  run declaro clean
   assert_line -n 0 "There are no stray packages. Nothing to remove."
   assert_line -n 1 "There are no missing packages. Nothing to install."
 }
 
-@test "pacmark diff works" {
-  run pacmark diff
+@test "declaro diff works" {
+  run declaro diff
   assert_output "\
 +pkg5
 -pkg3
 -pkg4"
 }
 
-@test "pacmark generate creates a keepfile correctly" {
+@test "declaro generate creates a keepfile correctly" {
   rm $KEEPLISTFILE
-  run pacmark generate
+  run declaro generate
   assert_output -e "Generating new packages.list file containing 3 packages:
 \spkg1 pkg2 pkg5"
 }
 
-@test "pacmark list shows the marked packages" {
-  run pacmark list
+@test "declaro list shows the declared packages" {
+  run declaro list
   assert_output "\
 pkg1
 pkg2
@@ -113,12 +113,12 @@ pkg3
 pkg4"
 }
 
-@test "pacmark mark marks packages and detects already marked" {
-  run pacmark mark pkg5 pkg6 pkg3
+@test "declaro declare works and detects already declared" {
+  run declaro declare pkg5 pkg6 pkg3
   assert_output -e "\
-Packages already marked:
+Packages already declared:
 \spkg3
-Marking packages:
+Declaring packages:
 \spkg5 pkg6"
   run parse_keepfile $KEEPLISTFILE
   assert_output "\
@@ -130,26 +130,26 @@ pkg5
 pkg6"
 }
 
-@test "pacmark status works" {
-  run pacmark status pkg1 pkg2 pkg3 pkg4 pkg5 pkg6
+@test "declaro status works" {
+  run declaro status pkg1 pkg2 pkg3 pkg4 pkg5 pkg6
   assert_output "\
 pkg1
 installed: yes
-marked: yes
+declared: yes
 pkg2
 installed: yes
-marked: yes
+declared: yes
 pkg3
 installed: no
-marked: yes
+declared: yes
 pkg4
 installed: no
-marked: yes
+declared: yes
 pkg5
 installed: yes
-marked: no
+declared: no
 pkg6
 installed: no
-marked: no"
+declared: no"
 }
 

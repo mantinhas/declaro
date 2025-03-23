@@ -4,7 +4,7 @@ SHRDIR=$(dirname $BASH_SOURCE)
 source $SHRDIR/utils.sh
 
 function status_aux {
-  # Is marked
+  # Is declared
   if grep -E "^$1$" <($LIST_COMMAND) &>/dev/null; then
     echo "installed: yes"
   else
@@ -13,9 +13,9 @@ function status_aux {
 
   # Is installed
   if grep -E "^$1$" <(parse_keepfile $KEEPLISTFILE) &>/dev/null; then
-    echo "marked: yes"
+    echo "declared: yes"
   else 
-    echo "marked: no"
+    echo "declared: no"
   fi
 }
 

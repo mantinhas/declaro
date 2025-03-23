@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # IF XDG_CONFIG_HOME is not set, use ~/.config/packeep/config.sh
-CONFIGFILE=${CONFIGFILE:-${XDG_CONFIG_HOME:-$HOME/.config}/pacmark/config.sh}
+CONFIGFILE=${CONFIGFILE:-${XDG_CONFIG_HOME:-$HOME/.config}/declaro/config.sh}
 source $CONFIGFILE 2>/dev/null
 
-# If KEEPLISTFILE is not set, use XDG_CONFIG_HOME or ~/.config/pacmark/packages.list
-KEEPLISTFILE=${KEEPLISTFILE:-${XDG_CONFIG_HOME:-$HOME/.config}/pacmark/packages.list}
+# If KEEPLISTFILE is not set, use XDG_CONFIG_HOME or ~/.config/declaro/packages.list
+KEEPLISTFILE=${KEEPLISTFILE:-${XDG_CONFIG_HOME:-$HOME/.config}/declaro/packages.list}
 
 UNINSTALL_COMMAND=${UNINSTALL_COMMAND:-"sudo pacman -Rns --noconfirm"}
 INSTALL_COMMAND=${INSTALL_COMMAND:-"sudo pacman -S --noconfirm"}
@@ -42,11 +42,11 @@ function query_pkgslist {
 }
 
 # Get input pkgs that are not in KEEPLIST
-function filter_unmarkedpkgs {
+function filter_undeclaredpkgs {
   comm -13 <(parse_keepfile $KEEPLISTFILE) <(echo $@ | tr ' ' '\n' | sort)
 }
 
 # Get input pkgs that are in KEEPLIST
-function filter_markedpkgs {
+function filter_declaredpkgs {
   comm -12 <(parse_keepfile $KEEPLISTFILE) <(echo $@ | tr ' ' '\n' | sort)
 }

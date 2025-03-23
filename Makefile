@@ -9,29 +9,29 @@ all:
 	@echo "Usage: make [install|uninstall]"
 
 install:
-	@echo "Installing pacmark..."
-	$(SUDO) install -Dm755 src/pacmark.sh $(DESTDIR)$(BINDIR)/pacmark
-	$(SUDO) install -Dm644 src/clean.sh $(DESTDIR)$(SHRDIR)/pacmark/clean.sh
-	$(SUDO) install -Dm644 src/diff.sh $(DESTDIR)$(SHRDIR)/pacmark/diff.sh
-	$(SUDO) install -Dm644 src/edit.sh $(DESTDIR)$(SHRDIR)/pacmark/edit.sh
-	$(SUDO) install -Dm644 src/generate.sh $(DESTDIR)$(SHRDIR)/pacmark/generate.sh
-	$(SUDO) install -Dm644 src/list.sh $(DESTDIR)$(SHRDIR)/pacmark/list.sh
-	$(SUDO) install -Dm644 src/mark.sh $(DESTDIR)$(SHRDIR)/pacmark/mark.sh
-	$(SUDO) install -Dm644 src/status.sh $(DESTDIR)$(SHRDIR)/pacmark/status.sh
-	$(SUDO) install -Dm644 src/utils.sh $(DESTDIR)$(SHRDIR)/pacmark/utils.sh
+	@echo "Installing declaro..."
+	$(SUDO) install -Dm755 src/declaro.sh $(DESTDIR)$(BINDIR)/declaro
+	$(SUDO) install -Dm644 src/clean.sh $(DESTDIR)$(SHRDIR)/declaro/clean.sh
+	$(SUDO) install -Dm644 src/diff.sh $(DESTDIR)$(SHRDIR)/declaro/diff.sh
+	$(SUDO) install -Dm644 src/edit.sh $(DESTDIR)$(SHRDIR)/declaro/edit.sh
+	$(SUDO) install -Dm644 src/generate.sh $(DESTDIR)$(SHRDIR)/declaro/generate.sh
+	$(SUDO) install -Dm644 src/list.sh $(DESTDIR)$(SHRDIR)/declaro/list.sh
+	$(SUDO) install -Dm644 src/declare.sh $(DESTDIR)$(SHRDIR)/declaro/declare.sh
+	$(SUDO) install -Dm644 src/status.sh $(DESTDIR)$(SHRDIR)/declaro/status.sh
+	$(SUDO) install -Dm644 src/utils.sh $(DESTDIR)$(SHRDIR)/declaro/utils.sh
 	@echo "Installation finished."
 	@echo "Generating packages.list ..."
-	bash $(DESTDIR)$(BINDIR)/pacmark generate
+	bash $(DESTDIR)$(BINDIR)/declaro generate
 	@echo "Generating packages.list finished."
 	@echo "Done."
 
 uninstall:
-	@echo "Uninstalling pacmark..."
-	$(SUDO) rm -f $(DESTDIR)$(BINDIR)/pacmark
-	$(SUDO) rm -rf $(DESTDIR)$(SHRDIR)/pacmark
+	@echo "Uninstalling declaro..."
+	$(SUDO) rm -f $(DESTDIR)$(BINDIR)/declaro
+	$(SUDO) rm -rf $(DESTDIR)$(SHRDIR)/declaro
 	@echo "Done."
 
 test:
-	@echo "Testing pacmark..."
+	@echo "Testing declaro..."
 	@./test/bats/bin/bats test/test_cases/test.bats
 	@echo "Done."
