@@ -1,4 +1,4 @@
-# declaro - a simple yet powerful declarative wrapper for any Linux distro
+# declaro - a simple yet powerful declarative wrapper for any linux distro
 
 ## 🚀 Why This Project Exists
 
