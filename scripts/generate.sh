@@ -20,9 +20,9 @@ function generate {
     fi
   fi
 
-  echo -e "Generating new packages.list file containing $(pacman -Qqe | wc -l) packages:\n\t$(pacman -Qqe | tr '\n' ' ')"
+  echo -e "Generating new packages.list file containing $($LIST_COMMAND | wc -l) packages:\n\t$($LIST_COMMAND | tr '\n' ' ')"
   echo "# Packages list generated on $(date)" > $KEEPLISTFILE
-  pacman -Qqe >> $KEEPLISTFILE
+  $LIST_COMMAND >> $KEEPLISTFILE
 }
 
 generate $@

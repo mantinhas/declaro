@@ -3,7 +3,7 @@ BINDIR = $(PREFIX)/bin
 SHRDIR = $(PREFIX)/share
 SUDO ?= sudo
 
-.PHONY: all install uninstall
+.PHONY: all install uninstall test
 
 all:
 	@echo "Usage: make [install|uninstall]"
@@ -13,6 +13,7 @@ install:
 	$(SUDO) install -Dm755 scripts/pacmark.sh $(DESTDIR)$(BINDIR)/pacmark
 	$(SUDO) install -Dm644 scripts/clean.sh $(DESTDIR)$(SHRDIR)/pacmark/clean.sh
 	$(SUDO) install -Dm644 scripts/diff.sh $(DESTDIR)$(SHRDIR)/pacmark/diff.sh
+	$(SUDO) install -Dm644 scripts/edit.sh $(DESTDIR)$(SHRDIR)/pacmark/edit.sh
 	$(SUDO) install -Dm644 scripts/generate.sh $(DESTDIR)$(SHRDIR)/pacmark/generate.sh
 	$(SUDO) install -Dm644 scripts/list.sh $(DESTDIR)$(SHRDIR)/pacmark/list.sh
 	$(SUDO) install -Dm644 scripts/mark.sh $(DESTDIR)$(SHRDIR)/pacmark/mark.sh
@@ -28,4 +29,9 @@ uninstall:
 	@echo "Uninstalling pacmark..."
 	$(SUDO) rm -f $(DESTDIR)$(BINDIR)/pacmark
 	$(SUDO) rm -rf $(DESTDIR)$(SHRDIR)/pacmark
+	@echo "Done."
+
+test:
+	@echo "Testing pacmark..."
+	@./test/bats/bin/bats test/test_cases/test.bats
 	@echo "Done."

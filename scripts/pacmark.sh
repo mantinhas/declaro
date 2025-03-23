@@ -33,7 +33,7 @@ function main {
       bash $SHRDIR/diff.sh
       ;;
     edit)
-      $EDITOR $KEEPLISTFILE
+      bash $SHRDIR/edit.sh
       ;;
     generate)
       bash $SHRDIR/generate.sh
