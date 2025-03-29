@@ -23,6 +23,7 @@ function main {
     echo "Error: No packages specified to declare."
     exit 1
   fi
+  ASSERT_KEEPFILE_EXISTS
   declare $@
 }
 

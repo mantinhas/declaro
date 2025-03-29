@@ -14,6 +14,14 @@ LIST_COMMAND=${LIST_COMMAND:-"pacman -Qqe"}
 # Set locale to C to make sort consider '-' and '+' as characters
 export LC_COLLATE=C
 
+function ASSERT_KEEPFILE_EXISTS {
+  if [ ! -f $KEEPLISTFILE ]; then
+    echo "Error: Missing packages.list at $KEEPLISTFILE."
+    echo "Run 'declaro generate' to create a new one."
+    exit 1
+  fi
+}
+
 function parse_keepfile {
   # Remove comments, remove whitespace and remove empty lines, then sort
   sed -e 's/#.*$//' -e 's/[ \t]*//g' -e '/^\s*$/d' $1 | sort

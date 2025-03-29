@@ -20,10 +20,6 @@ install:
 	$(SUDO) install -Dm644 src/status.sh $(DESTDIR)$(SHRDIR)/declaro/status.sh
 	$(SUDO) install -Dm644 src/utils.sh $(DESTDIR)$(SHRDIR)/declaro/utils.sh
 	@echo "Installation finished."
-	@echo "Generating packages.list ..."
-	bash $(DESTDIR)$(BINDIR)/declaro generate
-	@echo "Generating packages.list finished."
-	@echo "Done."
 
 uninstall:
 	@echo "Uninstalling declaro..."

@@ -4,12 +4,6 @@ SHRDIR=$(dirname $BASH_SOURCE)
 source $SHRDIR/utils.sh
 
 function clean {
-
-  # If file does not exist abort
-  if [ ! -f $KEEPLISTFILE ]; then
-    echo "File packages.list does not exist. Aborting..." >&2
-    exit 1
-  fi
   # Remove packages not in KEEPLISTFILE
   # Save packages list into string, not run command
   STRAY_PKGS=$(get_stray_pkgs | xargs)
@@ -36,4 +30,9 @@ function clean {
   echo "Cleaning done."
 }
 
-clean
+function main {
+  ASSERT_KEEPFILE_EXISTS
+  clean
+}
+
+main

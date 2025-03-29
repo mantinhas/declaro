@@ -48,10 +48,6 @@ function main {
       bash $SHRDIR/declare.sh $@
       ;;
     undeclare)
-      #if [[ $# -eq 0 ]]; then
-      #    echo "Error: No packages specified to undeclare."
-      #    exit 1
-      #fi
       echo "Error: Undeclare command is not yet implemented."
       ;;
     --help|-h)
