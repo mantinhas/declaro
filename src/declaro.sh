@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SHRDIR=$(dirname $BASH_SOURCE)/../share/declaro
+SHRBINDIR=$(dirname $BASH_SOURCE)/../share/declaro/bin
 
 function show_help {
   echo "Usage: declaro [command] [args]"
@@ -27,25 +27,25 @@ function main {
 
   case $command in
     clean)
-      bash $SHRDIR/clean.sh
+      bash $SHRBINDIR/clean.sh
       ;;
     diff)
-      bash $SHRDIR/diff.sh
+      bash $SHRBINDIR/diff.sh
       ;;
     edit)
-      bash $SHRDIR/edit.sh
+      bash $SHRBINDIR/edit.sh
       ;;
     generate)
-      bash $SHRDIR/generate.sh
+      bash $SHRBINDIR/generate.sh
       ;;
     list)
-      bash $SHRDIR/list.sh
+      bash $SHRBINDIR/list.sh
       ;;
     status)
-      bash $SHRDIR/status.sh $@
+      bash $SHRBINDIR/status.sh $@
       ;;
     declare)
-      bash $SHRDIR/declare.sh $@
+      bash $SHRBINDIR/declare.sh $@
       ;;
     undeclare)
       echo "Error: Undeclare command is not yet implemented."

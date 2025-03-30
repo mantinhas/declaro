@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SHRDIR=$(dirname $BASH_SOURCE)
-source $SHRDIR/utils.sh
+SHRBINDIR=$(dirname $BASH_SOURCE)
+source $SHRBINDIR/utils.sh
 
 $EDITOR $KEEPLISTFILE
