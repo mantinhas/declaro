@@ -7,7 +7,7 @@ function show_help {
   echo "Commands:"
   echo "  clean                    Reset state to declared"
   echo "  diff                     Show diff between declared state and actual state"
-  echo "  edit                     Edit the packages.list file"
+  echo "  edit                     Edit the packages.list file in your default editor (\$EDITOR)"
   echo "  generate                 Generate a new packages.list file"
   echo "  list                     List all declared packages"
   echo "  status pkg1 pkg2 ...     Show the status of a package (is declared and is installed)"
