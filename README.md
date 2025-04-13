@@ -15,7 +15,7 @@
 
 ### Define Your System State
 
-`declaro` will generate a `packages.list` file in `~/.config/declaro/packages.list` with the packages you currently have installed. Start by editing this file directly, or by running `declaro edit`. The format is one package per line, with optional comments:
+`declaro` will generate a `packages.list` file in `/etc/declaro/packages.list` with the packages you currently have installed (you can change this location in the config file). Start by editing this file manually, or by running `sudo declaro edit`. The format is one package per line, with optional comments:
 
 ```bash
 # Creative Software
@@ -49,5 +49,9 @@ neovim # My favorite text editor
 
 2. **Clone and install:**
     ```bash
+    # Clone and install the package
     git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
+
+    # Copy the correct config file to /etc/declaro/config.sh
+    sudo install -Dm644 /usr/local/share/declaro/config/pacman-config.sh /etc/declaro/config.sh
     ```

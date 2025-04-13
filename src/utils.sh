@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 
-# IF XDG_CONFIG_HOME is not set, use ~/.config/packeep/config.sh
-CONFIGFILE=${CONFIGFILE:-${XDG_CONFIG_HOME:-$HOME/.config}/declaro/config.sh}
-source $CONFIGFILE 2>/dev/null
+CONFIGFILE="/etc/declaro/config.sh"
+if [ -f $CONFIGFILE ]; then
+  # If the config file exists, use it
+  source $CONFIGFILE 2>/dev/null
+else
+  echo "Warning: Missing config file at \"/etc/declaro/config.sh\". Falling back to Arch Linux's default configuration." >&2
+  echo "To fix this warning, please copy the correct template:" >&2
+  echo -e "\tsudo install -Dm644 {install-location}/share/declaro/config/{template} /etc/declaro/config.sh" >&2
+  echo -e "\t{install-location} is most likely /usr or /usr/local ." >&2
+fi
 
-# If KEEPLISTFILE is not set, use XDG_CONFIG_HOME or ~/.config/declaro/packages.list
-KEEPLISTFILE=${KEEPLISTFILE:-${XDG_CONFIG_HOME:-$HOME/.config}/declaro/packages.list}
+# If KEEPLISTFILE is not set, use the default /etc location
+KEEPLISTFILE=${KEEPLISTFILE:-"/etc/declaro/packages.list"}
 
+# DEFAULTS not set in config
 UNINSTALL_COMMAND=${UNINSTALL_COMMAND:-"sudo pacman -Rns --noconfirm"}
 INSTALL_COMMAND=${INSTALL_COMMAND:-"sudo pacman -S --noconfirm"}
 LIST_COMMAND=${LIST_COMMAND:-"pacman -Qqe"}
@@ -16,8 +24,8 @@ export LC_COLLATE=C
 
 function ASSERT_KEEPFILE_EXISTS {
   if [ ! -f $KEEPLISTFILE ]; then
-    echo "Error: Missing packages.list at $KEEPLISTFILE."
-    echo "Run 'declaro generate' to create a new one."
+    echo "Error: Missing packages.list at \"$KEEPLISTFILE\"." >&2
+    echo "To fix this error, run 'declaro generate' to create a new packages.list." >&2
     exit 1
   fi
 }

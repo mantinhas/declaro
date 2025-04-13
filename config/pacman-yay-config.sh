@@ -1,4 +1,4 @@
-KEEPLISTFILE=${XDG_CONFIG_HOME:-$HOME/.config}/declaro/packages.list
+KEEPLISTFILE="/etc/declaro/packages.list"
 
 UNINSTALL_COMMAND="sudo pacman -Rns --noconfirm"
 INSTALL_COMMAND="yay -S --noconfirm"
