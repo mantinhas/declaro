@@ -12,7 +12,6 @@ function show_help {
   echo "  list                     List all declared packages"
   echo "  status pkg1 pkg2 ...     Show the status of a package (is declared and is installed)"
   echo "  declare pkg1 pkg2 ...    Declare the specified packages as permanent"
-  echo "  undeclare pkg1 pkg2 ...  [WIP] Undeclare the specified packages, making them removable"
   echo "  --help, -h               Show this help message"
 }
 
@@ -47,14 +46,11 @@ function main {
     declare)
       bash $SHRBINDIR/declare.sh $@
       ;;
-    undeclare)
-      echo "Error: Undeclare command is not yet implemented."
-      ;;
     --help|-h)
       show_help
       ;;
     *)
-      echo "Error: Unknown command '$command'"
+      echo "Error: Unknown command '$command'" >&2
       show_help
       exit 1
       ;;
