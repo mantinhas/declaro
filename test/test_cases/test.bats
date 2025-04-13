@@ -12,11 +12,11 @@ setup() {
 
   load "$DIR/../test_helper/bats-support/load"
   load "$DIR/../test_helper/bats-assert/load"
-  load "$DIR/../share/declaro/utils.sh"
+  load "$DIR/../share/declaro/bin/utils.sh"
   export PATH=$DIR/../bin/:$PATH
   cp $DIR/data/packages.list $DIR/data/packages.list.1
   # Just so it doesn't read the real config file
-  export CONFIGFILE=$DIR/data/config.sh
+  export DECLAROCONFFILE=$DIR/data/config.sh
   export KEEPLISTFILE=$DIR/data/packages.list.1
 
   # Mock package manager interactions 

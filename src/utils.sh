@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 
-CONFIGFILE="/etc/declaro/config.sh"
-if [ -f $CONFIGFILE ]; then
-  # If the config file exists, use it
-  source $CONFIGFILE 2>/dev/null
-else
+DECLAROCONFFILE=${DECLAROCONFFILE:-"/etc/declaro/config.sh"}
+
+if [ ! -f "$DECLAROCONFFILE" ] && [ "$DECLAROCONFFILE" = "/etc/declaro/config.sh" ]; then
   echo "Warning: Missing config file at \"/etc/declaro/config.sh\". Falling back to Arch Linux's default configuration." >&2
   echo "To fix this warning, please copy the correct template:" >&2
   echo -e "\tsudo install -Dm644 {install-location}/share/declaro/config/{template} /etc/declaro/config.sh" >&2
   echo -e "\t{install-location} is most likely /usr or /usr/local ." >&2
+else
+  # If the config file exists or is a custom path, use it
+  source "$DECLAROCONFFILE" 2>/dev/null
 fi
 
 # If KEEPLISTFILE is not set, use the default /etc location
