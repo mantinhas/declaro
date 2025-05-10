@@ -5,7 +5,7 @@ source $SHRBINDIR/utils.sh
 
 function status_aux {
   # Is declared
-  if grep -E "^$1$" <($LIST_COMMAND) &>/dev/null; then
+  if grep -E "^$1$" <(LIST_COMMAND) &>/dev/null; then
     echo "installed: yes"
   else
     echo "installed: no"

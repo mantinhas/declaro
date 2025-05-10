@@ -12,18 +12,14 @@ setup() {
 
   load "$DIR/../test_helper/bats-support/load"
   load "$DIR/../test_helper/bats-assert/load"
-  load "$DIR/../share/declaro/bin/utils.sh"
   export PATH=$DIR/../bin/:$PATH
-  cp $DIR/data/packages.list $DIR/data/packages.list.1
-  # Just so it doesn't read the real config file
-  export DECLAROCONFFILE=$DIR/data/config.sh
-  export KEEPLISTFILE=$DIR/data/packages.list.1
+  cp "$DIR/data/packages.list" "$DIR/data/packages.list.1"
 
-  # Mock package manager interactions 
-  export LIST_COMMAND="echo -e pkg1\npkg2\npkg5"
-  export INSTALL_COMMAND="true"
-  export UNINSTALL_COMMAND="true"
+  export DECLAROCONFFILE="$DIR/data/config-dirty-state.sh"
+  export KEEPLISTFILE="$DIR/data/packages.list.1"
+  load "$DIR/../share/declaro/bin/utils.sh"
 }
+
 
 teardown() {
   rm $KEEPLISTFILE
@@ -83,7 +79,8 @@ pkg4"
 }
 
 @test "declaro clean does nothing if no packages are strayed or missing" {
-  export LIST_COMMAND="echo -e pkg1\npkg2\npkg3\npkg4"
+  export DECLAROCONFFILE="$DIR/data/config-clean-state.sh"
+
   run declaro clean
   assert_line -n 0 "There are no stray packages. Nothing to remove."
   assert_line -n 1 "There are no missing packages. Nothing to install."
@@ -100,6 +97,8 @@ pkg4"
 @test "declaro generate creates a keepfile correctly" {
   rm $KEEPLISTFILE
   run declaro generate
+  source $DECLAROCONFFILE
+  LIST_COMMAND
   assert_output -e "Generating new packages.list file containing 3 packages:
 \spkg1 pkg2 pkg5"
 }

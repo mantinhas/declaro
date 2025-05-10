@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 DECLAROCONFFILE=${DECLAROCONFFILE:-"/etc/declaro/config.sh"}
+SHRDIR=$(realpath "$(dirname $BASH_SOURCE)/../..")
 
 if [ ! -f "$DECLAROCONFFILE" ] && [ "$DECLAROCONFFILE" = "/etc/declaro/config.sh" ]; then
-  echo "Warning: Missing config file at \"/etc/declaro/config.sh\". Falling back to Arch Linux's default configuration." >&2
-  echo "To fix this warning, please copy the correct template:" >&2
-  echo -e "\tsudo install -Dm644 {install-location}/share/declaro/config/{template} /etc/declaro/config.sh" >&2
-  echo -e "\t{install-location} is most likely /usr or /usr/local ." >&2
+  echo "Error: Missing config file at \"/etc/declaro/config.sh\"." >&2
+  echo "To fix this error, please copy the correct config:" >&2
+  echo -e "\tsudo install -Dm644 $SHRDIR/declaro/config/{correct-config} /etc/declaro/config.sh" >&2
+  exit 1
 else
   # If the config file exists or is a custom path, use it
   source "$DECLAROCONFFILE" 2>/dev/null
@@ -14,11 +15,6 @@ fi
 
 # If KEEPLISTFILE is not set, use the default /etc location
 KEEPLISTFILE=${KEEPLISTFILE:-"/etc/declaro/packages.list"}
-
-# DEFAULTS not set in config
-UNINSTALL_COMMAND=${UNINSTALL_COMMAND:-"sudo pacman -Rns --noconfirm"}
-INSTALL_COMMAND=${INSTALL_COMMAND:-"sudo pacman -S --noconfirm"}
-LIST_COMMAND=${LIST_COMMAND:-"pacman -Qqe"}
 
 # Set locale to C to make sort consider '-' and '+' as characters
 export LC_COLLATE=C
@@ -38,7 +34,7 @@ function parse_keepfile {
 
 # Prints the packages in one and not the other, and vice-versa
 function diff_keepfile_installed {
-  diff -u <(parse_keepfile $KEEPLISTFILE) <($LIST_COMMAND | sort) | sed -n "/^[-+][^-+]/p" | sort
+  diff -u <(parse_keepfile $KEEPLISTFILE) <(LIST_COMMAND | sort) | sed -n "/^[-+][^-+]/p" | sort
 }
 
 # Get KEEPLIST pkgs that are not installed

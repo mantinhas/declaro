@@ -1,26 +1,44 @@
-# declaro - a simple yet powerful declarative wrapper for any linux distro
+# declaro - a simple declarative wrapper for any package manager
 
 ## 🚀 Why This Project Exists
 
 - **🚧 The Problem:** Desktop Linux systems accumulate unnecessary packages over time — apps installed briefly, forgotten, and left to clutter your system. This is a nightmare for small disks and system hygiene (run `pacman -Qq | wc -l` to see how many packages you have installed).
 
-- **🤔 Why Current Solutions Fall Short:** Tools like NixOS are powerful but overly complex for users who don’t need complete reproducibility - just a clean clutter-free system.
+- **🤔 Why Current Solutions Fall Short:** Tools like NixOS are powerful but overly complex for users who don’t need complete reproducibility - just a clutter-free system.
 
 - **💡 Our Solution:** A powerful declarative package manager wrapper that:
     - ✅ Lets you define a clean "reset state" for your system
     - 🔄 Provides tools to manage and reset your system back to that declarative state
-    - 📝 Forces you to explicitly define what you want to keep
+    - 📝 Forces you to explicitly define what you want to keep, rather than what you want to remove
 
 ## Usage
 
-### Define Your System State
+### Define Your Clean System State
 
-`declaro` will generate a `packages.list` file in `/etc/declaro/packages.list` with the packages you currently have installed (you can change this location in the config file). Start by editing this file manually, or by running `sudo declaro edit`. The format is one package per line, with optional comments:
+First, start by generating the packages list from the current list of explicitly installed packages:
+
+```bash
+sudo declaro generate
+```
+
+This will create the `packages.list` file in `/etc/declaro/packages.list` (you can change this location in the config file). Then, you may edit this file either manually:
+
+```bash
+sudo nano /etc/declaro/packages.list
+```
+
+Or by running:
+
+```bash
+sudo declaro edit
+```
+
+Here, you can add packages you want to keep permanently, or delete packages you no longer require. The `packages.list` file format is one package per line, with optional comments:
 
 ```bash
 # Creative Software
 gimp
-audacity # This one is for Audio
+audacity # This one is for audio
 blender
 
 # Programming
@@ -31,7 +49,7 @@ neovim # My favorite text editor
 
 ### Main Commands
 
-- **`declaro clean`**: Removes all stray packages (installed packages not declared in `packages.list`) and installs all missing packages (packages declared in `packages.list` but not installed).
+- **`declaro clean`**: Removes all stray packages (installed packages not declared in `packages.list`) and installs all missing packages (packages declared in `packages.list` but not installed)
 - **`declaro diff`**: Shows the difference between your current system and your `packages.list`
 - **`declaro list`**: Lists all packages in your `packages.list`
 - **`declaro edit`**: Opens `packages.list` in your default editor (defined by `$EDITOR`)
@@ -40,18 +58,51 @@ neovim # My favorite text editor
 
 ## Install
 
+### Automatic Installation
+
+- For **Arch Linux**, you can download `declaro` from the AUR:
+    ```bash
+    git clone https://aur.archlinux.org/declaro-git.git && cd declaro-git && makepkg -si
+    ```
+
 ### Manual Installation
 
-1. **Download dependencies: (i.e. Arch Linux)**
-    ```bash
-    sudo pacman -S bash pacman diffutils sed xargs make sudo coreutils
-    ```
+1. **Download dependencies:**
+
+    - For **Arch Linux**:
+        ```bash
+        sudo pacman -S bash diffutils sed findutils make sudo coreutils
+        ```
+    - For **Ubuntu**:
+        ```bash
+        sudo apt install bash diffutils sed findutils make sudo coreutils
+        ```
 
 2. **Clone and install:**
     ```bash
     # Clone and install the package
     git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
-
-    # Copy the correct config file to /etc/declaro/config.sh
-    sudo install -Dm644 /usr/local/share/declaro/config/pacman-config.sh /etc/declaro/config.sh
     ```
+
+3. **Set up the config file:**
+    - For **Arch Linux (pacman)**:
+        ```bash
+        sudo install -Dm644 /usr/local/share/declaro/config/pacman-config.sh /etc/declaro/config.sh
+        ```
+
+    - For **Arch Linux (yay)**:
+        ```bash
+        sudo install -Dm644 /usr/local/share/declaro/config/pacman-yay-config.sh /etc/declaro/config.sh
+        ```
+
+    - For **Ubuntu (apt)**:
+        ```bash
+        sudo install -Dm644 /usr/local/share/declaro/config/apt-config.sh /etc/declaro/config.sh
+        ```
+
+    - For non-supported package managers:
+        1. Copy the template config file:
+            ```bash
+            sudo install -Dm644 /usr/local/share/declaro/config/template-config.sh /etc/declaro/config.sh
+            ```
+        2. Edit the config file to match your package manager's commands. The config file is well-commented, so you should be able to figure it out easily.
