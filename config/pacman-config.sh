@@ -10,5 +10,5 @@ INSTALL_COMMAND () {
 }
 # Command to list all manually/explicitely installed packages
 LIST_COMMAND () {
-  pacman -Qqe
+  pacman -Qqen
 }
