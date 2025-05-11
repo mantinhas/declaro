@@ -61,9 +61,9 @@ neovim # My favorite text editor
 ### Automatic Installation
 
 - For **Arch Linux**, you can download `declaro` from the AUR:
-    ```bash
-    git clone https://aur.archlinux.org/declaro-git.git && cd declaro-git && makepkg -si
-    ```
+```bash
+git clone https://aur.archlinux.org/declaro-git.git && cd declaro-git && makepkg -si
+```
 
 ### Manual Installation
 
