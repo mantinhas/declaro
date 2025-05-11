@@ -67,42 +67,31 @@ neovim # My favorite text editor
 
 ### Manual Installation
 
-1. **Download dependencies:**
+- For **Arch Linux (pacman)**:
+```bash
+sudo pacman -S bash diffutils sed findutils make sudo coreutils && \
+git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
+sudo install -Dm644 /usr/local/share/declaro/config/pacman-config.sh /etc/declaro/config.sh
+```
 
-    - For **Arch Linux**:
+- For **Arch Linux (pacman and yay)**:
+```bash
+sudo pacman -S bash diffutils sed findutils make sudo coreutils && \
+git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
+sudo install -Dm644 /usr/local/share/declaro/config/pacman-yay-config.sh /etc/declaro/config.sh
+```
+
+- For **Ubuntu**:
+```bash
+sudo apt install bash diffutils sed findutils make sudo coreutils && \
+git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
+sudo install -Dm644 /usr/local/share/declaro/config/apt-config.sh /etc/declaro/config.sh
+```
+
+- For non-supported package managers:
+    1. Download and install the corresponding dependencies and declaro repo
+    2. Copy the template config file:
         ```bash
-        sudo pacman -S bash diffutils sed findutils make sudo coreutils
+        sudo install -Dm644 /usr/local/share/declaro/config/template-config.sh /etc/declaro/config.sh
         ```
-    - For **Ubuntu**:
-        ```bash
-        sudo apt install bash diffutils sed findutils make sudo coreutils
-        ```
-
-2. **Clone and install:**
-    ```bash
-    # Clone and install the package
-    git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
-    ```
-
-3. **Set up the config file:**
-    - For **Arch Linux (pacman)**:
-        ```bash
-        sudo install -Dm644 /usr/local/share/declaro/config/pacman-config.sh /etc/declaro/config.sh
-        ```
-
-    - For **Arch Linux (yay)**:
-        ```bash
-        sudo install -Dm644 /usr/local/share/declaro/config/pacman-yay-config.sh /etc/declaro/config.sh
-        ```
-
-    - For **Ubuntu (apt)**:
-        ```bash
-        sudo install -Dm644 /usr/local/share/declaro/config/apt-config.sh /etc/declaro/config.sh
-        ```
-
-    - For non-supported package managers:
-        1. Copy the template config file:
-            ```bash
-            sudo install -Dm644 /usr/local/share/declaro/config/template-config.sh /etc/declaro/config.sh
-            ```
-        2. Edit the config file to match your package manager's commands. The config file is well-commented, so you should be able to figure it out easily.
+    3. Edit the config file to match your package manager's commands. The config file is well-commented, so you should be able to figure it out easily.
