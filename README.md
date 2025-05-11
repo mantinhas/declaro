@@ -69,21 +69,21 @@ git clone https://aur.archlinux.org/declaro-git.git && cd declaro-git && makepkg
 
 - For **Arch Linux (pacman)**:
 ```bash
-sudo pacman -S bash diffutils sed findutils make sudo coreutils && \
+sudo pacman -S git bash diffutils sed findutils make sudo coreutils && \
 git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
 sudo install -Dm644 /usr/local/share/declaro/config/pacman-config.sh /etc/declaro/config.sh
 ```
 
 - For **Arch Linux (pacman and yay)**:
 ```bash
-sudo pacman -S bash diffutils sed findutils make sudo coreutils && \
+sudo pacman -S git bash diffutils sed findutils make sudo coreutils && \
 git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
 sudo install -Dm644 /usr/local/share/declaro/config/pacman-yay-config.sh /etc/declaro/config.sh
 ```
 
 - For **Ubuntu**:
 ```bash
-sudo apt install bash diffutils sed findutils make sudo coreutils && \
+sudo apt install git bash diffutils sed findutils make sudo coreutils && \
 git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
 sudo install -Dm644 /usr/local/share/declaro/config/apt-config.sh /etc/declaro/config.sh
 ```
