@@ -30,7 +30,7 @@ sudo nano /etc/declaro/packages.list
 Or by running:
 
 ```bash
-sudo declaro edit
+declaro edit
 ```
 
 Here, you can add packages you want to keep permanently, or delete packages you no longer require. The `packages.list` file format is one package per line, with optional comments:
