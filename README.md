@@ -18,7 +18,7 @@
 First, start by generating the packages list from the current list of explicitly installed packages:
 
 ```bash
-sudo declaro generate
+declaro generate
 ```
 
 This will create the `packages.list` file in `/etc/declaro/packages.list` (you can change this location in the config file). Then, you may edit this file either manually:
