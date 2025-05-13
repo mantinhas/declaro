@@ -12,7 +12,7 @@ function declare {
 
   if (( $(filter_undeclaredpkgs $@ | wc -l) > 0 )); then
     echo -e "Declaring packages:\n\t$(filter_undeclaredpkgs $@ | xargs)"
-    filter_undeclaredpkgs $@ | sed "s/$/ # $ADDED_MESSAGE/g" >> $KEEPLISTFILE
+    filter_undeclaredpkgs $@ | sed "s/$/ # $ADDED_MESSAGE/g" | sudo tee -a $KEEPLISTFILE > /dev/null
   else
     echo "No packages to declare."
   fi
