@@ -67,7 +67,7 @@ git clone https://aur.archlinux.org/declaro-git.git && cd declaro-git && makepkg
 
 ### Manual Installation
 
-- For **Arch Linux (pacman)**:
+- For **Arch Linux (pacman w/out AUR)**:
 ```bash
 sudo pacman -S git bash diffutils sed findutils make sudo coreutils && \
 git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
@@ -88,7 +88,7 @@ git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
 sudo install -Dm644 /usr/local/share/declaro/config/apt-config.sh /etc/declaro/config.sh
 ```
 
-- For non-supported package managers:
+- For any other package managers:
     1. Download and install the corresponding dependencies and declaro repo
     2. Copy the template config file:
         ```bash
