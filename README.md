@@ -88,6 +88,13 @@ git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
 sudo install -Dm644 /usr/local/share/declaro/config/apt-config.sh /etc/declaro/config.sh
 ```
 
+- For **Fedora/RHEL**:
+```bash
+sudo dnf install git bash diffutils sed findutils make sudo coreutils && \
+git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
+sudo install -Dm644 /usr/local/share/declaro/config/dnf-config.sh /etc/declaro/config.sh
+```
+
 - For any other package managers:
     1. Download and install the corresponding dependencies and declaro repo
     2. Copy the template config file:
@@ -95,3 +102,6 @@ sudo install -Dm644 /usr/local/share/declaro/config/apt-config.sh /etc/declaro/c
         sudo install -Dm644 /usr/local/share/declaro/config/template-config.sh /etc/declaro/config.sh
         ```
     3. Edit the config file to match your package manager's commands. The config file is well-commented, so you should be able to figure it out easily.
+        ```bash
+        sudo nano /etc/declaro/config.sh
+        ```
