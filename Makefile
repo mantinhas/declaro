@@ -13,13 +13,13 @@ all:
 install:
 	@echo "Installing declaro..."
 	$(SUDO) install -Dm755 src/declaro.sh $(DESTDIR)$(BINDIR)/declaro
-	$(SUDO) install -Dm644 src/clean.sh $(DESTDIR)$(SHRBINDIR)/clean.sh
-	$(SUDO) install -Dm644 src/diff.sh $(DESTDIR)$(SHRBINDIR)/diff.sh
-	$(SUDO) install -Dm644 src/edit.sh $(DESTDIR)$(SHRBINDIR)/edit.sh
-	$(SUDO) install -Dm644 src/generate.sh $(DESTDIR)$(SHRBINDIR)/generate.sh
-	$(SUDO) install -Dm644 src/list.sh $(DESTDIR)$(SHRBINDIR)/list.sh
-	$(SUDO) install -Dm644 src/declare.sh $(DESTDIR)$(SHRBINDIR)/declare.sh
-	$(SUDO) install -Dm644 src/status.sh $(DESTDIR)$(SHRBINDIR)/status.sh
+	$(SUDO) install -Dm644 src/commands/clean.sh $(DESTDIR)$(SHRBINDIR)/clean.sh
+	$(SUDO) install -Dm644 src/commands/diff.sh $(DESTDIR)$(SHRBINDIR)/diff.sh
+	$(SUDO) install -Dm644 src/commands/edit.sh $(DESTDIR)$(SHRBINDIR)/edit.sh
+	$(SUDO) install -Dm644 src/commands/generate.sh $(DESTDIR)$(SHRBINDIR)/generate.sh
+	$(SUDO) install -Dm644 src/commands/list.sh $(DESTDIR)$(SHRBINDIR)/list.sh
+	$(SUDO) install -Dm644 src/commands/declare.sh $(DESTDIR)$(SHRBINDIR)/declare.sh
+	$(SUDO) install -Dm644 src/commands/status.sh $(DESTDIR)$(SHRBINDIR)/status.sh
 	$(SUDO) install -Dm644 src/utils.sh $(DESTDIR)$(SHRBINDIR)/utils.sh
 	$(SUDO) cp -r config $(DESTDIR)$(SHRCONFDIR)
 	@echo "Installation finished."
