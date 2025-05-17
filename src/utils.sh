@@ -5,8 +5,10 @@ SHRDIR=$(realpath "$(dirname $BASH_SOURCE)/../..")
 
 if [ ! -f "$DECLAROCONFFILE" ] && [ "$DECLAROCONFFILE" = "/etc/declaro/config.sh" ]; then
   echo "Error: Missing config file at \"/etc/declaro/config.sh\"." >&2
-  echo "To fix this error, please copy the correct config:" >&2
+  echo "To fix this, either install the correct configuration:" >&2
   echo -e "\tsudo install -Dm644 $SHRDIR/declaro/config/<your-config-file>.sh /etc/declaro/config.sh" >&2
+  echo "Or if there isn't a correct one, create one based on our provided template:" >&2
+  echo -e "\tsudo install -Dm644 $SHRDIR/declaro/config/template-config.sh /etc/declaro/config.sh" >&2
   exit 1
 else
   # If the config file exists or is a custom path, use it
