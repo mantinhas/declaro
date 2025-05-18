@@ -120,13 +120,9 @@ git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
 
     - **For supported distros (Arch Linux, Ubuntu, Fedora/RHEL)**:
 
-        - Pick the matching config file from the ones we provide:
+        - Use the script to detect and install the correct config:
         ```bash
-        ls /usr/local/share/declaro/config
-        ```
-        - Install it to `/etc/declaro/config.sh`:
-        ```bash
-        sudo install -Dm644 /usr/local/share/declaro/config/<your-config-file>.sh /etc/declaro/config.sh
+        make install-config
         ```
 
     - **For non-supported distros**:
