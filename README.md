@@ -96,22 +96,26 @@ git clone https://aur.archlinux.org/declaro-git.git && cd declaro-git && makepkg
 git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
 ```
 
-3. Pick the config file that matches your package manager:
-    - For supported distros (Arch Linux, Ubuntu, Fedora/RHEL):
-        1. Pick the matching config file from the ones we provide:
+3. Install the config file:
+
+    - **For supported distros (Arch Linux, Ubuntu, Fedora/RHEL)**:
+
+        - Pick the matching config file from the ones we provide:
         ```bash
         ls /usr/local/share/declaro/config
         ```
-        2. Install it to `/etc/declaro/config.sh`:
+        - Install it to `/etc/declaro/config.sh`:
         ```bash
         sudo install -Dm644 /usr/local/share/declaro/config/<your-config-file>.sh /etc/declaro/config.sh
         ```
-    - For unsupported distros:
-        1. Copy the template config file:
+
+    - **For unsupported distros**:
+
+        - Copy the template config file:
         ```bash
         sudo install -Dm644 /usr/local/share/declaro/config/template-config.sh /etc/declaro/config.sh
         ```
-        2. Edit the config file to match your package manager's commands. Refer to the [Configuration Section](#configuration) for more details. 
+        - Edit the config file to match your package manager's commands. Refer to the [Configuration Section](#configuration) for more details. 
         ```bash
         sudo nano /etc/declaro/config.sh
         ```
