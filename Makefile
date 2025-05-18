@@ -27,9 +27,13 @@ install:
 	$(SUDO) install -Dm644 src/utils.sh $(DESTDIR)$(SHRBINDIR)/utils.sh
 	$(SUDO) install -d $(DESTDIR)$(SHRCONFDIR)
 	$(SUDO) cp config/* $(DESTDIR)$(SHRCONFDIR)
+	@echo "Done."
+
+install-config:
 	@echo "Installing configuration..."
 	SUDO="$(SUDO) " ETC_DECLARO_DIR=$(DESTDIR)$(ETC_DECLARO_DIR) bash scripts/detect-and-install-config.sh
 	@echo "Done."
+
 
 uninstall:
 	@echo "Uninstalling declaro..."
@@ -39,5 +43,5 @@ uninstall:
 
 test:
 	@echo "Testing declaro..."
-	@./test/bats/bin/bats test/test_cases/test.bats
+	@./test/bats/bin/bats test/test_cases/
 	@echo "Done."
