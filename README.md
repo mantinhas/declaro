@@ -77,7 +77,7 @@ LIST_COMMAND () {
 
 Currently, we provide config files for `apt`, `dnf`, `pacman`, `pacman-paru` and `pacman-yay` package managers. And we will keep adding more as we go. If you want to add support for your package manager, please open an issue or a pull request.
 
-## Install
+## Installation
 
 ### Automatic Installation
 
