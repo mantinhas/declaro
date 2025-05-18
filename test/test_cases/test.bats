@@ -1,5 +1,5 @@
 setup_file() {
-  echo -e "\n" | make INSTALL_CONFIG=false SUDO= PREFIX=test install > /dev/null
+  echo -e "\n" | make SUDO= PREFIX=test install > /dev/null
 }
 
 teardown_file() {
