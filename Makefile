@@ -1,7 +1,5 @@
 SUDO ?= sudo
 
-INSTALL_CONFIG ?= true
-
 PREFIX ?= /usr/local
 BINDIR = $(PREFIX)/bin
 SHRDIR = $(PREFIX)/share
