@@ -56,6 +56,27 @@ neovim # My favorite text editor
 - **`declaro declare <pkg1> <pkg2> ...`**: Declares packages by appending them to `packages.list`
 - **`declaro status <pkg1> <pkg2> ...`**: Shows the status of packages
 
+## Configuration
+
+`declaro` was written to be package manager agnostic. As such, integrating with a package manager is as simple as defining three functions in a config file at `/etc/declaro/config.sh`. Consider our [`apt-config.sh`](config/apt-config) for Ubuntu systems:
+
+```bash
+# Command to install a package and its dependencies (no confirm/user prompts)
+UNINSTALL_COMMAND () {
+  sudo apt-get remove $@ -y
+}
+# Command to install a package and its dependencies (no confirm/user prompts)
+INSTALL_COMMAND () {
+  sudo apt-get install $@ -y
+}
+# Command to list all manually/explicitely installed packages
+LIST_COMMAND () {
+  apt-mark showmanual
+}
+```
+
+Currently, we provide config files for `apt`, `dnf`, `pacman`, `pacman-paru` and `pacman-yay` package managers. And we will keep adding more as we go. If you want to add support for your package manager, please open an issue or a pull request.
+
 ## Install
 
 ### Automatic Installation
@@ -67,41 +88,31 @@ git clone https://aur.archlinux.org/declaro-git.git && cd declaro-git && makepkg
 
 ### Manual Installation
 
-- For **Arch Linux (pacman w/out AUR)**:
+1. Make sure you have the following the dependencies installed:
+```git bash diffutils sed findutils make sudo coreutils```
+
+2. Clone the repository and install declaro:
 ```bash
-sudo pacman -S git bash diffutils sed findutils make sudo coreutils && \
-git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
-sudo install -Dm644 /usr/local/share/declaro/config/pacman-config.sh /etc/declaro/config.sh
+git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
 ```
 
-- For **Arch Linux (pacman and yay)**:
-```bash
-sudo pacman -S git bash diffutils sed findutils make sudo coreutils && \
-git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
-sudo install -Dm644 /usr/local/share/declaro/config/pacman-yay-config.sh /etc/declaro/config.sh
-```
-
-- For **Ubuntu**:
-```bash
-sudo apt install git bash diffutils sed findutils make sudo coreutils && \
-git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
-sudo install -Dm644 /usr/local/share/declaro/config/apt-config.sh /etc/declaro/config.sh
-```
-
-- For **Fedora/RHEL**:
-```bash
-sudo dnf install git bash diffutils sed findutils make sudo coreutils && \
-git clone https://github.com/mantinhas/declaro.git && cd declaro && make install && \
-sudo install -Dm644 /usr/local/share/declaro/config/dnf-config.sh /etc/declaro/config.sh
-```
-
-- For any other package managers:
-    1. Download and install the corresponding dependencies and declaro repo
-    2. Copy the template config file:
+3. Pick the config file that matches your package manager:
+    - For supported distros (Arch Linux, Ubuntu, Fedora/RHEL):
+        1. Pick the matching config file from the ones we provide:
+        ```bash
+        ls /usr/local/share/declaro/config
+        ```
+        2. Install it to `/etc/declaro/config.sh`:
+        ```bash
+        sudo install -Dm644 /usr/local/share/declaro/config/<your-config-file>.sh /etc/declaro/config.sh
+        ```
+    - For unsupported distros:
+        1. Copy the template config file:
         ```bash
         sudo install -Dm644 /usr/local/share/declaro/config/template-config.sh /etc/declaro/config.sh
         ```
-    3. Edit the config file to match your package manager's commands. The config file is well-commented, so you should be able to figure it out easily.
+        2. Edit the config file to match your package manager's commands. Refer to the [Configuration Section](#configuration) for more details. 
         ```bash
         sudo nano /etc/declaro/config.sh
         ```
+
