@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ETC_DECLARO_DIR="/etc/declaro"
+ETC_DECLARO_DIR=${ETC_DECLARO_DIR:-"/etc/declaro"}
+SUDO=${SUDO:-"sudo"}
 
 # 'name              ; requirements for a config_file         ; config_file'
 CONFIG_FILE_TABLE=(
@@ -22,7 +23,7 @@ for CONFIG in "${CONFIG_FILE_TABLE[@]}"; do
     echo "Detected package manager setup: $NAME"
 
     echo "Installing config file $CONFFILE..."
-    sudo install -Dm644 "config/$CONFFILE" ${ETC_DECLARO_DIR}/config.sh
+    ${SUDO} install -Dm644 "config/$CONFFILE" ${ETC_DECLARO_DIR}/config.sh
     exit 0
   fi
 done

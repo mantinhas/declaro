@@ -27,14 +27,8 @@ install:
 	$(SUDO) install -Dm644 src/utils.sh $(DESTDIR)$(SHRBINDIR)/utils.sh
 	$(SUDO) install -d $(DESTDIR)$(SHRCONFDIR)
 	$(SUDO) cp config/* $(DESTDIR)$(SHRCONFDIR)
-	@if [ $(INSTALL_CONFIG) = "true" ]; then \
-		echo "Installing configuration..."; \
-		if [ -e "$(ETC_DECLARO_DIR)/config.sh" ]; then \
-			echo "Found existing config file at "$(ETC_DECLARO_DIR)/config.sh". Skipping..."; \
-		else \
-			bash scripts/detect-and-install-config.sh; \
-		fi \
-	fi
+	@echo "Installing configuration..."
+	SUDO="$(SUDO) " ETC_DECLARO_DIR=$(DESTDIR)$(ETC_DECLARO_DIR) bash scripts/detect-and-install-config.sh
 	@echo "Done."
 
 uninstall:
