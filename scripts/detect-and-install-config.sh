@@ -6,9 +6,11 @@ SUDO=${SUDO:-"sudo"}
 # 'name              ; requirements for a config_file         ; config_file'
 CONFIG_FILE_TABLE=(
   'apt               ; apt --version                          ; apt-config.sh'
-  'pacman with yay   ; pacman --version && pacman -Qq yay     ; pacman-yay-config.sh'
-  'pacman w/out AUR  ; pacman --version                       ; pacman-config.sh'
   'dnf               ; dnf --version                          ; dnf-config.sh'
+  'pacman with paru  ; pacman --version && pacman -Qq paru    ; pacman-paru-config.sh'
+  'pacman with yay   ; pacman --version && pacman -Qq yay     ; pacman-yay-config.sh'
+  # has to be after paru and yay
+  'pacman w/out AUR  ; pacman --version                       ; pacman-config.sh'
 )
 
 for CONFIG in "${CONFIG_FILE_TABLE[@]}"; do
