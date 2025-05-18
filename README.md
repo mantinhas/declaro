@@ -58,7 +58,7 @@ neovim # My favorite text editor
 
 ## Configuration
 
-`declaro` was written to be package manager agnostic. As such, integrating with a package manager is as simple as defining three functions in a config file at `/etc/declaro/config.sh`. Consider our [`apt-config.sh`](config/apt-config.sh) for Ubuntu systems:
+`declaro` was written to be package manager agnostic. As such, integrating with a package manager is as simple as defining three functions in a config file. Consider our [`apt-config.sh`](config/apt-config.sh) for Ubuntu systems:
 
 ```bash
 # Command to install a package and its dependencies (no confirm/user prompts)
@@ -75,7 +75,27 @@ LIST_COMMAND () {
 }
 ```
 
-Currently, we provide config files for `apt`, `dnf`, `pacman`, `pacman-paru` and `pacman-yay` package managers. And we will keep adding more as we go. If you want to add support for your package manager, please open an issue or a pull request.
+### Available Configurations
+
+Currently, we provide config files for `apt`, `dnf`, `pacman`, `pacman-paru` and `pacman-yay` package managers, and we will keep adding more as we go. After installing, you can find these configs at:
+- `/usr/local/share/declaro/config`
+- `/usr/share/declaro/config`
+- Or browse the repository [here](config)
+
+### Configurations for non-supported distros
+
+If your package manager has no configuration available, you can:
+
+1. Copy the template config file:
+```bash
+sudo install -Dm644 /usr/local/share/declaro/config/template-config.sh /etc/declaro/config.sh
+```
+2. Edit the functions to match your package manager's commands.
+```bash
+sudo nano /etc/declaro/config.sh
+```
+
+If you would like to help us and add official support for your package manager, please open an issue or a pull request.
 
 ## Installation
 
@@ -109,7 +129,7 @@ git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
         sudo install -Dm644 /usr/local/share/declaro/config/<your-config-file>.sh /etc/declaro/config.sh
         ```
 
-    - **For unsupported distros**:
+    - **For non-supported distros**:
 
         - Copy the template config file:
         ```bash
