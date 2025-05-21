@@ -1,9 +1,11 @@
+SUDO ?= sudo
+
 PREFIX ?= /usr/local
 BINDIR = $(PREFIX)/bin
 SHRDIR = $(PREFIX)/share
 SHRBINDIR = $(SHRDIR)/declaro/bin
 SHRCONFDIR = $(SHRDIR)/declaro/config
-SUDO ?= sudo
+ETC_DECLARO_DIR = /etc/declaro
 
 .PHONY: all install uninstall test
 
@@ -23,7 +25,13 @@ install:
 	$(SUDO) install -Dm644 src/utils.sh $(DESTDIR)$(SHRBINDIR)/utils.sh
 	$(SUDO) install -d $(DESTDIR)$(SHRCONFDIR)
 	$(SUDO) cp config/* $(DESTDIR)$(SHRCONFDIR)
-	@echo "Installation finished."
+	@echo "Done."
+
+install-config:
+	@echo "Installing configuration..."
+	SUDO="$(SUDO) " ETC_DECLARO_DIR=$(DESTDIR)$(ETC_DECLARO_DIR) bash scripts/detect-and-install-config.sh
+	@echo "Done."
+
 
 uninstall:
 	@echo "Uninstalling declaro..."
@@ -33,5 +41,5 @@ uninstall:
 
 test:
 	@echo "Testing declaro..."
-	@./test/bats/bin/bats test/test_cases/test.bats
+	@./test/bats/bin/bats test/test_cases/
 	@echo "Done."

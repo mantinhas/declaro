@@ -58,7 +58,7 @@ neovim # My favorite text editor
 
 ## Configuration
 
-`declaro` was written to be package manager agnostic. As such, integrating with a package manager is as simple as defining three functions in a config file. Consider our [`apt-config.sh`](config/apt-config.sh) for Ubuntu systems:
+`declaro` was written to be package manager agnostic. As such, integrating with a package manager is as simple as defining three functions in a config file at `/etc/declaro/config.sh`. Consider our [`apt-config.sh`](config/apt-config.sh) for Ubuntu systems:
 
 ```bash
 # Command to install a package and its dependencies (no confirm/user prompts)
@@ -120,13 +120,9 @@ git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
 
     - **For supported distros (Arch Linux, Ubuntu, Fedora/RHEL)**:
 
-        - Pick the matching config file from the ones we provide:
+        - Use the script to detect and install the correct config:
         ```bash
-        ls /usr/local/share/declaro/config
-        ```
-        - Install it to `/etc/declaro/config.sh`:
-        ```bash
-        sudo install -Dm644 /usr/local/share/declaro/config/<your-config-file>.sh /etc/declaro/config.sh
+        make install-config
         ```
 
     - **For non-supported distros**:
