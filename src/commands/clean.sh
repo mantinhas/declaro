@@ -3,8 +3,10 @@
 SHRBINDIR=$(dirname $BASH_SOURCE)
 source $SHRBINDIR/utils.sh
 
-function clean {
+function remove_stray {
   # Remove packages not in KEEPLISTFILE
+  echo -e ":: Removing stray packages ::\n"
+
   # Save packages list into string, not run command
   STRAY_PKGS=$(get_stray_pkgs | xargs)
 
@@ -15,8 +17,12 @@ function clean {
   else 
     echo "There are no stray packages. Nothing to remove."
   fi
+}
 
+function install_missing {
   # Install packages in KEEPLISTFILE
+  echo -e ":: Installing missing packages ::\n"
+
   MISSING_PKGS=$(get_missing_pkgs | xargs)
 
   if [[ -n $MISSING_PKGS ]]; then
@@ -26,13 +32,13 @@ function clean {
   else
     echo "There are no missing packages. Nothing to install."
   fi
-
-  echo "Cleaning done."
 }
 
 function main {
   ASSERT_KEEPFILE_EXISTS
-  clean
+  remove_stray
+  printf "\n"
+  install_missing
 }
 
 main
