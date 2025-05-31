@@ -78,6 +78,14 @@ pkg4"
   assert_line -n 7 -e "\spkg3 pkg4"
 }
 
+@test "declaro clean deals with errors in installing and uninstalling" {
+  export DECLAROCONFFILE="$DIR/data/config-errors.sh"
+  run declaro clean
+  assert_output --partial "test case error message uninstall"
+  assert_output --partial "test case error message install"
+  
+}
+
 @test "declaro clean does nothing if no packages are strayed or missing" {
   export DECLAROCONFFILE="$DIR/data/config-clean-state.sh"
 
