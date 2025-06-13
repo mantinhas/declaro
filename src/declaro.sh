@@ -5,14 +5,15 @@ SHRBINDIR=$(dirname $BASH_SOURCE)/../share/declaro/bin
 function show_help {
   echo "Usage: declaro [command] [args]"
   echo "Commands:"
-  echo "  clean                    Reset state to declared"
-  echo "  diff                     Show diff between declared state and actual state"
-  echo "  edit                     Edit the packages.list file in your default editor (\$EDITOR)"
-  echo "  generate                 Generate a new packages.list file"
-  echo "  list                     List all declared packages"
-  echo "  status pkg1 pkg2 ...     Show the status of a package (is declared and is installed)"
-  echo "  declare pkg1 pkg2 ...    Declare the specified packages as permanent"
-  echo "  --help, -h               Show this help message"
+  echo "  clean                      Reset state to declared"
+  echo "  declare <pkg1> [pkg2...]   Declare the specified packages as permanent"
+  echo "  diff                       Show diff between declared state and actual state"
+  echo "  edit                       Edit the packages.list file in your default editor (\$EDITOR)"
+  echo "  export <file>              Export the configurations and packages list to a tar.gz file"
+  echo "  generate                   Generate a new packages.list file"
+  echo "  list                       List all declared packages"
+  echo "  status <pkg1> [pkg2...]    Show the status of a package (is declared and is installed)"
+  echo "  --help, -h                 Show this help message"
 }
 
 function main {
@@ -45,6 +46,9 @@ function main {
       ;;
     declare)
       bash $SHRBINDIR/declare.sh $@
+      ;;
+    export)
+      bash $SHRBINDIR/export.sh $1
       ;;
     --help|-h)
       show_help

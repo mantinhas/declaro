@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-DECLAROCONFFILE=${DECLAROCONFFILE:-"/etc/declaro/config.sh"}
+ETC_DECLARO_DIR=${ETC_DECLARO_DIR:-"/etc/declaro"}
+DECLAROCONFFILE=${DECLAROCONFFILE:-"${ETC_DECLARO_DIR}/config.sh"}
 SHRDIR=$(realpath "$(dirname $BASH_SOURCE)/../..")
 
 if [ ! -f "$DECLAROCONFFILE" ] && [ "$DECLAROCONFFILE" = "/etc/declaro/config.sh" ]; then
