@@ -35,6 +35,7 @@ function status {
 function main {
   if (( $# == 0 )); then
     echo "Error: No package specified to check status." >&2
+    echo "Usage: status <pkg1> [pkg2...]" >&2
     exit 1
   fi
   ASSERT_KEEPFILE_EXISTS

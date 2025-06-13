@@ -21,6 +21,7 @@ function declare {
 function main {
   if [[ $# -eq 0 ]]; then
     echo "Error: No packages specified to declare." >&2
+    echo "Usage: declare <pkg1> [pkg2...]" >&2
     exit 1
   fi
   ASSERT_KEEPFILE_EXISTS
