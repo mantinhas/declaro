@@ -8,7 +8,7 @@ function show_help {
   echo "  clean                      Reset state to declared"
   echo "  declare <pkg1> [pkg2...]   Declare the specified packages as permanent"
   echo "  diff                       Show diff between declared state and actual state"
-  echo "  edit                       Edit the packages.list file in your default editor (\$EDITOR)"
+  echo "  edit                       Edit the packages.list file in your default editor (\$VISUAL)"
   echo "  export <file>              Export the configurations and packages list to a tar.gz file"
   echo "  generate                   Generate a new packages.list file"
   echo "  list                       List all declared packages"
