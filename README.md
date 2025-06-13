@@ -109,7 +109,7 @@ git clone https://aur.archlinux.org/declaro-git.git && cd declaro-git && makepkg
 ### Manual Installation
 
 1. Make sure you have the following the dependencies installed:
-```git bash diffutils sed findutils make sudo coreutils```
+```git bash diffutils sed findutils make sudo coreutils tar```
 
 2. Clone the repository and install declaro:
 ```bash
