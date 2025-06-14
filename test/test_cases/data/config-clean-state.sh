@@ -8,6 +8,3 @@ INSTALL_COMMAND () {
 UNINSTALL_COMMAND () {
   true
 }
-sudo () {
-  $@
-}

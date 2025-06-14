@@ -10,6 +10,3 @@ UNINSTALL_COMMAND () {
   echo "test case error message uninstall"
   return 1
 }
-sudo () {
-  $@
-}
