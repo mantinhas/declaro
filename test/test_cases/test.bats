@@ -19,6 +19,7 @@ setup() {
   export DECLAROCONFFILE="$DIR/data/config-dirty-state.sh"
   export KEEPLISTFILE="$DIR/data/packages.list.1"
   load "$DIR/../share/declaro/bin/utils.sh"
+  LOAD_DECLAROCONFFILE
 }
 
 

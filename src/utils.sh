@@ -1,23 +1,34 @@
 #!/usr/bin/env bash
 
+SUDO=${SUDO:-"sudo"}
 ETC_DECLARO_DIR=${ETC_DECLARO_DIR:-"/etc/declaro"}
 DECLAROCONFFILE=${DECLAROCONFFILE:-"${ETC_DECLARO_DIR}/config.sh"}
 SHRDIR=$(realpath "$(dirname $BASH_SOURCE)/../..")
 
-if [ ! -f "$DECLAROCONFFILE" ] && [ "$DECLAROCONFFILE" = "/etc/declaro/config.sh" ]; then
-  echo "Error: Missing config file at \"/etc/declaro/config.sh\"." >&2
-  echo "To fix this, either install the correct configuration:" >&2
-  echo -e "\tsudo install -Dm644 $SHRDIR/declaro/config/<your-config-file>.sh /etc/declaro/config.sh" >&2
-  echo "Or if there isn't a correct one, create one based on our provided template:" >&2
-  echo -e "\tsudo install -Dm644 $SHRDIR/declaro/config/template-config.sh /etc/declaro/config.sh" >&2
-  exit 1
-else
-  # If the config file exists or is a custom path, use it
-  source "$DECLAROCONFFILE" 2>/dev/null
-fi
+function ASSERT_KEEPFILE_EXISTS {
+  if [ ! -f $KEEPLISTFILE ]; then
+    echo "Error: Missing packages.list at \"$KEEPLISTFILE\"." >&2
+    echo "To fix this error, run 'declaro generate' to create a new packages.list." >&2
+    exit 1
+  fi
+}
+
+function LOAD_DECLAROCONFFILE {
+  if [ ! -f "$DECLAROCONFFILE" ] && [ "$DECLAROCONFFILE" = "/etc/declaro/config.sh" ]; then
+    echo "Error: Missing config file at \"/etc/declaro/config.sh\"." >&2
+    echo "To fix this, either install the correct configuration:" >&2
+    echo -e "\tsudo install -Dm644 $SHRDIR/declaro/config/<your-config-file>.sh /etc/declaro/config.sh" >&2
+    echo "Or if there isn't a correct one, create one based on our provided template:" >&2
+    echo -e "\tsudo install -Dm644 $SHRDIR/declaro/config/template-config.sh /etc/declaro/config.sh" >&2
+    exit 1
+  else
+    # If the config file exists or is a custom path, use it
+    source "$DECLAROCONFFILE" 2>/dev/null
+  fi
+}
 
 # If KEEPLISTFILE is not set, use the default /etc location
-KEEPLISTFILE=${KEEPLISTFILE:-"/etc/declaro/packages.list"}
+KEEPLISTFILE=${KEEPLISTFILE:-"${ETC_DECLARO_DIR}/packages.list"}
 
 # Set locale to C to make sort consider '-' and '+' as characters
 export LC_COLLATE=C
