@@ -60,6 +60,7 @@ function install_missing {
 
 function main {
   ASSERT_KEEPFILE_EXISTS
+  LOAD_DECLAROCONFFILE
   remove_stray
   printf "\n"
   install_missing

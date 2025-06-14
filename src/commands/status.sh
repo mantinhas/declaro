@@ -39,6 +39,7 @@ function main {
     exit 1
   fi
   ASSERT_KEEPFILE_EXISTS
+  LOAD_DECLAROCONFFILE
   status $@
 }
 

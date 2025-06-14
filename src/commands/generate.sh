@@ -25,4 +25,5 @@ function generate {
   LIST_COMMAND | sudo tee -a $KEEPLISTFILE > /dev/null
 }
 
+LOAD_DECLAROCONFFILE
 generate $@
