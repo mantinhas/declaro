@@ -8,7 +8,7 @@ function generate {
   # If file does not exist, create it and parent directories
   if [ ! -f $KEEPLISTFILE ]; then
     mkdir -p $(dirname $KEEPLISTFILE)
-    sudo touch $KEEPLISTFILE
+    ${SUDO} touch $KEEPLISTFILE
   fi
 
   # Check if file has contents
@@ -21,8 +21,8 @@ function generate {
   fi
 
   echo -e "Generating new packages.list file containing $(LIST_COMMAND | wc -l) packages:\n\t$(LIST_COMMAND | tr '\n' ' ')"
-  echo "# Packages list generated on $(date)" | sudo tee $KEEPLISTFILE > /dev/null
-  LIST_COMMAND | sudo tee -a $KEEPLISTFILE > /dev/null
+  echo "# Packages list generated on $(date)" | ${SUDO} tee $KEEPLISTFILE > /dev/null
+  LIST_COMMAND | ${SUDO} tee -a $KEEPLISTFILE > /dev/null
 }
 
 LOAD_DECLAROCONFFILE
