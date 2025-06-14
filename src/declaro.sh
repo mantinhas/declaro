@@ -11,6 +11,7 @@ function show_help {
   echo "  edit                       Edit the packages.list file in your default editor (\$VISUAL)"
   echo "  export <file>              Export the configurations and packages list to a tar.gz file"
   echo "  generate                   Generate a new packages.list file"
+  echo "  import <source>            Import a declared state from a .tar.gz file or Git repository"
   echo "  list                       List all declared packages"
   echo "  status <pkg1> [pkg2...]    Show the status of a package (is declared and is installed)"
   echo "  --help, -h                 Show this help message"
@@ -49,6 +50,9 @@ function main {
       ;;
     export)
       bash $SHRBINDIR/export.sh $1
+      ;;
+    import)
+      bash $SHRBINDIR/import.sh $1
       ;;
     --help|-h)
       show_help

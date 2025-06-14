@@ -13,18 +13,50 @@ setup() {
   load "$DIR/../test_helper/bats-support/load"
   load "$DIR/../test_helper/bats-assert/load"
   export PATH=$DIR/../bin/:$PATH
-  cp "$DIR/data/packages.list" "$DIR/data/packages.list.1"
 
-  export ETC_DECLARO_DIR="$DIR/data"
-  export DECLAROCONFFILE="$DIR/data/config-dirty-state.sh"
-  export KEEPLISTFILE="$DIR/data/packages.list.1"
+  mkdir "$DIR/mock_etc_declaro"
+  export ETC_DECLARO_DIR="$DIR/mock_etc_declaro"
+  export SUDO=" "
+  cp "$DIR/data/config-dirty-state.sh" "$ETC_DECLARO_DIR/config.sh"
+  cp "$DIR/data/packages.list" "$ETC_DECLARO_DIR/packages.list"
   load "$DIR/../share/declaro/bin/utils.sh"
   LOAD_DECLAROCONFFILE
 }
 
 
 teardown() {
-  rm $KEEPLISTFILE
+  teardown_etc_declaro
+}
+
+teardown_etc_declaro() {
+  rm -rf "$ETC_DECLARO_DIR"
+}
+
+setup_git_repo(){
+  # Create a mock git repository for testing
+  MOCK_GIT_REPO="$DIR/mock_git_repo"
+  MOCK_REMOTE_REPO="$DIR/mock_remote_repo"
+
+  mkdir -p "$MOCK_REMOTE_REPO"
+  cd "$MOCK_REMOTE_REPO"
+  git init --bare
+
+  mkdir -p "$MOCK_GIT_REPO"
+  cd "$MOCK_GIT_REPO"
+  git init
+  git config commit.gpgsign false
+  git config init.defaultBranch main
+  cp "$DIR/data/packages.list" packages.list
+  cp "$DIR/data/config-dirty-state.sh" config.sh
+  git add packages.list config.sh
+  git commit -m "Initial commit with packages list"
+  git remote add origin "$MOCK_REMOTE_REPO"
+  git push -u origin main
+}
+
+teardown_git_repo() {
+  rm -rf $MOCK_GIT_REPO
+  rm -rf $MOCK_REMOTE_REPO
 }
 
 @test "utils: parsing keepfile works" {
@@ -175,4 +207,50 @@ declared: no"
 @test "declaro export fails without file argument" {
   run declaro export
   assert_failure
+}
+
+@test "declaro import works with tarball" {
+  tar --transform='s|packages.list.2|packages.list|;s|config-dirty-state.sh|config.sh|' -czf test.tar.gz --directory="$DIR/data" packages.list.2 config-dirty-state.sh
+  run declaro import test.tar.gz <<< 'y'
+  assert_success
+  run diff $KEEPLISTFILE "$DIR/data/packages.list.2"
+  # they are the same
+  assert_success
+  run diff $DECLAROCONFFILE "$DIR/data/config-dirty-state.sh"
+  # they are the same
+  assert_success
+
+  rm test.tar.gz
+}
+
+@test "declaro import works with git repository" {
+  setup_git_repo
+
+  run declaro import "$MOCK_REMOTE_REPO" <<< 'y'
+  assert_success
+
+  teardown_git_repo
+}
+
+@test "declaro export and import" {
+  # Create a tarball from the current ETC_DECLARO_DIR
+  run declaro export test.tar.gz
+  assert_success
+
+  # Delete the current ETC_DECLARO_DIR
+  teardown_etc_declaro
+  mkdir "$ETC_DECLARO_DIR"
+  
+  # ETC_DECLARO_DIR is empty now
+  assert_equal "$(ls -A "$ETC_DECLARO_DIR" | wc -l)" 0
+
+  # Import the tarball back into ETC_DECLARO_DIR
+  run declaro import test.tar.gz <<< 'y'
+  assert_success
+
+  # The packages.list file should now match the original
+  run diff $KEEPLISTFILE "$DIR/data/packages.list"
+  assert_success
+
+  rm test.tar.gz
 }

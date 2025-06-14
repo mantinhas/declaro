@@ -51,10 +51,10 @@ neovim # My favorite text editor
 
 - **`declaro clean`**: Removes all stray packages (installed packages not declared in `packages.list`) and installs all missing packages (packages declared in `packages.list` but not installed)
 - **`declaro diff`**: Shows the difference between your current system and your `packages.list`
-- **`declaro list`**: Lists all packages in your `packages.list`
 - **`declaro edit`**: Opens `packages.list` in your default editor (defined by `$VISUAL`)
-- **`declaro declare <pkg1> <pkg2> ...`**: Declares packages by appending them to `packages.list`
-- **`declaro status <pkg1> <pkg2> ...`**: Shows the status of packages
+- **`declaro export <file>`**: Export the configurations and `packages.list` to a tar.gz file
+- **`declaro import <source>`**: Import a declared state from a .tar.gz file or Git repository
+- **`declaro status <pkg1> [pkg2...]`**: Shows the status of packages
 
 ## Configuration
 
