@@ -5,7 +5,7 @@ source $SHRBINDIR/utils.sh
 
 function extract_from_source {
   EXTRACTED_SOURCE=$(mktemp -d -t declaro-import.XXXXXXXX)
-  #trap "rm -rf \"${EXTRACTED_SOURCE}\"" EXIT
+  trap "rm -rf \"${EXTRACTED_SOURCE}\"" EXIT
 
   if [[ -f "$1" && $(file "$1") =~ "gzip" ]]; then
     echo "Importing from tarball: $1"
