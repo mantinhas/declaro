@@ -16,6 +16,7 @@ function generate {
     # Request user confirmation
     read -p "File $KEEPLISTFILE already exists. Do you want to overwrite it? [y/N] " REPLY
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+      echo "Operation canceled - no changes were made."
       exit
     fi
   fi

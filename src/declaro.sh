@@ -5,6 +5,7 @@ SHRBINDIR=$(dirname $BASH_SOURCE)/../share/declaro/bin
 function show_help {
   echo "Usage: declaro [command] [args]"
   echo "Commands:"
+  echo "  install-config             Detect and install correct configuration for your package manager"
   echo "  clean                      Reset state to declared"
   echo "  declare <pkg1> [pkg2...]   Declare the specified packages as permanent"
   echo "  diff                       Show diff between declared state and actual state"
@@ -54,7 +55,10 @@ function main {
     import)
       bash $SHRBINDIR/import.sh $1
       ;;
-    --help|-h)
+    "install-config")
+      bash $SHRBINDIR/install-config.sh
+      ;;
+    "--help"|-h)
       show_help
       ;;
     *)
