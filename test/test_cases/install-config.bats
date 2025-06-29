@@ -1,5 +1,20 @@
 load ../test_helper/testing_base.bash
 
+@test "declaro install-config prompts for confirmation" {
+    function apt {
+      return 1
+    }
+    function dnf {
+      return 1
+    }
+    function pacman {
+      return 1
+    }
+    export -f apt dnf pacman
+    run bash -c "echo n | declaro install-config"
+    assert_output "Operation canceled - no changes were made."
+}
+
 @test "declaro install-config installs config file for pacman without AUR" {
     function apt {
       return 1
@@ -19,7 +34,7 @@ load ../test_helper/testing_base.bash
       fi
     }
     export -f apt dnf pacman
-    run declaro install-config
+    run bash -c "echo y | declaro install-config"
     assert_success
     run diff $DECLAROCONFFILE "test/share/declaro/config/pacman-config.sh"
     #they are the same
@@ -45,7 +60,7 @@ load ../test_helper/testing_base.bash
       fi
     }
     export -f apt dnf pacman
-    run declaro install-config
+    run bash -c "echo y | declaro install-config"
     assert_success
     run diff $DECLAROCONFFILE "test/share/declaro/config/pacman-paru-config.sh"
     #they are the same
@@ -63,7 +78,7 @@ load ../test_helper/testing_base.bash
       return 1
     }
     export -f apt dnf pacman
-    run declaro install-config
+    run bash -c "echo y | declaro install-config"
     assert_success
     run diff $DECLAROCONFFILE "test/share/declaro/config/dnf-config.sh"
     #they are the same
@@ -81,9 +96,24 @@ load ../test_helper/testing_base.bash
       return 1
     }
     export -f apt dnf pacman
-    run declaro install-config
+    run bash -c "echo y | declaro install-config"
     assert_success
     run diff $DECLAROCONFFILE "test/share/declaro/config/apt-config.sh"
     #they are the same
     assert_success
+}
+
+@test "declaro install-config errors if no supported package manager is found" {
+    function apt {
+      return 1
+    }
+    function dnf {
+      return 1
+    }
+    function pacman {
+      return 1
+    }
+    export -f apt dnf pacman
+    run bash -c "echo y | declaro install-config"
+    assert_failure
 }
