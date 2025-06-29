@@ -44,6 +44,7 @@ function install-config_as_subcommand {
   if [ "$(ls -A $ETC_DECLARO_DIR)" ]; then
     read -p "This will overwrite your current declared packages and configuration. Consider running 'declaro export' to create a backup first. Proceed? [y/N] " REPLY
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+      echo "Operation canceled - no changes were made."
       exit 0
     fi
   fi
@@ -64,7 +65,7 @@ function install-config_as_make {
 }
 
 function install-config {
-  if [ IS_CALLED_AS_SUBCOMMAND = "true" ]; then
+  if [ "${IS_CALLED_AS_SUBCOMMAND}" = "true" ]; then
     install-config_as_subcommand
   else
     install-config_as_make

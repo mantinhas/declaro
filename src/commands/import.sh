@@ -33,6 +33,7 @@ function import {
   if [ "$(ls -A $ETC_DECLARO_DIR)" ]; then
     read -p "This will overwrite your current declared packages and configuration. Consider running 'declaro export' to create a backup first. Proceed? [y/N] " REPLY
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+      echo "Operation canceled - no changes were made."
       exit
     fi
   fi

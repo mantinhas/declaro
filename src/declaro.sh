@@ -56,7 +56,7 @@ function main {
       bash $SHRBINDIR/import.sh $1
       ;;
     "install-config")
-      bash $SHRBINDIR/install-config.sh $1
+      bash $SHRBINDIR/install-config.sh
       ;;
     "--help"|-h)
       show_help
