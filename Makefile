@@ -24,6 +24,7 @@ install:
 	$(SUDO) install -Dm644 src/commands/status.sh $(DESTDIR)$(SHRBINDIR)/status.sh
 	$(SUDO) install -Dm644 src/commands/export.sh $(DESTDIR)$(SHRBINDIR)/export.sh
 	$(SUDO) install -Dm644 src/commands/import.sh $(DESTDIR)$(SHRBINDIR)/import.sh
+	$(SUDO) install -Dm644 src/commands/install-config.sh $(DESTDIR)$(SHRBINDIR)/install-config.sh
 	$(SUDO) install -Dm644 src/utils.sh $(DESTDIR)$(SHRBINDIR)/utils.sh
 	$(SUDO) install -d $(DESTDIR)$(SHRCONFDIR)
 	$(SUDO) cp config/* $(DESTDIR)$(SHRCONFDIR)
@@ -31,7 +32,7 @@ install:
 
 install-config:
 	@echo "Installing configuration..."
-	SUDO="$(SUDO) " ETC_DECLARO_DIR=$(DESTDIR)$(ETC_DECLARO_DIR) bash scripts/detect-and-install-config.sh
+	SUDO="$(SUDO) " ETC_DECLARO_DIR=$(DESTDIR)$(ETC_DECLARO_DIR) IS_CALLED_AS_SUBCOMMAND="false" bash src/commands/install_config.sh
 	@echo "Done."
 
 
