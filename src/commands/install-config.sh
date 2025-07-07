@@ -1,6 +1,7 @@
 #!/bin/bash
 
-SHRBINDIR=$(dirname $BASH_SOURCE)
+# HOTFIX: install.config can be called from make and must be path must be adjusted
+SHRBINDIR=${SHRBINDIR:-"$(dirname $BASH_SOURCE)"}
 source $SHRBINDIR/utils.sh
 
 #this command is the only declaro subcommand that can also be called from Makefile

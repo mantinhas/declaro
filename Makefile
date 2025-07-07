@@ -32,7 +32,7 @@ install:
 
 install-config:
 	@echo "Installing configuration..."
-	SUDO="$(SUDO) " ETC_DECLARO_DIR=$(DESTDIR)$(ETC_DECLARO_DIR) IS_CALLED_AS_SUBCOMMAND="false" bash src/commands/install_config.sh
+	SUDO="$(SUDO) " SHRBINDIR="src" ETC_DECLARO_DIR=$(DESTDIR)$(ETC_DECLARO_DIR) IS_CALLED_AS_SUBCOMMAND="false" bash src/commands/install-config.sh
 	@echo "Done."
 
 
