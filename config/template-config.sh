@@ -1,6 +1,6 @@
 KEEPLISTFILE="/etc/declaro/packages.list"
 
-# Command to install a package and its dependencies (no confirm/user prompts)
+# Command to uninstall a package and its dependencies (no confirm/user prompts)
 UNINSTALL_COMMAND () {
 
 }
