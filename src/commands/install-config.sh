@@ -15,6 +15,7 @@ CONFIG_FILE_TABLE=(
   'pacman with yay   ; pacman --version && pacman -Qq yay     ; pacman-yay-config.sh'
   # has to be after paru and yay
   'pacman w/out AUR  ; pacman --version                       ; pacman-config.sh'
+  'brew              ; brew --version                         ; brew-config.sh'
 )
 
 
