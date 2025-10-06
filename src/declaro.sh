@@ -8,6 +8,7 @@ function show_help {
   echo "  install-config             Detect and install correct configuration for your package manager"
   echo "  clean                      Reset state to declared"
   echo "  declare <pkg1> [pkg2...]   Declare the specified packages as permanent"
+  echo "  undeclare <pkg1> [pkg2...] Remove the specified packages from declaration"
   echo "  diff                       Show diff between declared state and actual state"
   echo "  edit                       Edit the packages.list file in your default editor (\$VISUAL)"
   echo "  export <file>              Export the configurations and packages list to a tar.gz file"
@@ -48,6 +49,9 @@ function main {
       ;;
     declare)
       bash $SHRBINDIR/declare.sh $@
+      ;;
+    undeclare)
+      bash $SHRBINDIR/undeclare.sh $@
       ;;
     export)
       bash $SHRBINDIR/export.sh $1
