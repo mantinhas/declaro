@@ -7,6 +7,9 @@ SHRBINDIR = $(SHRDIR)/declaro/bin
 SHRCONFDIR = $(SHRDIR)/declaro/config
 ETC_DECLARO_DIR = /etc/declaro
 
+# Helpers
+MKDIR_P ?= mkdir -p
+
 .PHONY: all install uninstall test
 
 all:
@@ -14,6 +17,13 @@ all:
 
 install:
 	@echo "Installing declaro..."
+
+	$(SUDO) $(MKDIR_P) \
+	  $(DESTDIR)$(BINDIR) \
+	  $(DESTDIR)$(SHRBINDIR) \
+	  $(DESTDIR)$(SHRCONFDIR) \
+	  $(DESTDIR)$(ETC_DECLARO_DIR)
+
 	$(SUDO) install -Dm755 src/declaro.sh $(DESTDIR)$(BINDIR)/declaro
 	$(SUDO) install -Dm644 src/commands/clean.sh $(DESTDIR)$(SHRBINDIR)/clean.sh
 	$(SUDO) install -Dm644 src/commands/diff.sh $(DESTDIR)$(SHRBINDIR)/diff.sh
