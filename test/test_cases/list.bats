@@ -1,7 +1,7 @@
 load ../test_helper/testing_base.bash
 
 @test "declaro list shows the declared packages" {
-  run declaro list
+  run $DECLARO_CMD list
   assert_output "\
 pkg1
 pkg2

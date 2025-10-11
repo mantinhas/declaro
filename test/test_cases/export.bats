@@ -1,7 +1,7 @@
 load ../test_helper/testing_base.bash
 
 @test "declaro export works" {
-  run declaro export test.tar.gz
+  run $DECLARO_CMD export test.tar.gz
   assert_success
   run tar -tzf test.tar.gz
   for file in $(find "${ETC_DECLARO_DIR}" -type f); do
@@ -11,7 +11,7 @@ load ../test_helper/testing_base.bash
 }
 
 @test "declaro export fails without file argument" {
-  run declaro export
+  run $DECLARO_CMD export
   assert_failure
 }
 
