@@ -77,7 +77,7 @@ LIST_COMMAND () {
 
 ### Available Configurations
 
-Currently, we provide config files for `apt`, `dnf`, `pacman`, `pacman-paru` and `pacman-yay` package managers, and we will keep adding more as we go. After installing, you can find these configs at:
+Currently, we provide config files for `apt`, `dnf`, `zypper` `pacman`, `pacman-paru` and `pacman-yay` package managers, and we will keep adding more as we go. After installing, you can find these configs at:
 - `/usr/local/share/declaro/config`
 - `/usr/share/declaro/config`
 - Or browse the repository [here](config)
@@ -118,7 +118,7 @@ git clone https://github.com/mantinhas/declaro.git && cd declaro && make install
 
 3. Install the config file:
 
-    - **For supported distros (Arch Linux, Ubuntu, Fedora/RHEL)**:
+    - **For supported distros (Arch Linux, Ubuntu, Fedora/RHEL, OpenSuse Tumbleweed)**:
 
         - Use the script to detect and install the correct config:
         ```bash
