@@ -10,6 +10,9 @@ load ../test_helper/testing_base.bash
     function pacman {
       return 1
     }
+    function zypper {
+      return 1
+    }
     export -f apt dnf pacman
     run bash -c "echo n | declaro install-config"
     assert_output "Operation canceled - no changes were made."
@@ -32,6 +35,9 @@ load ../test_helper/testing_base.bash
       else 
         return 0 # pacman command exists
       fi
+    }
+    function zypper {
+      return 1
     }
     export -f apt dnf pacman
     run bash -c "echo y | declaro install-config"
@@ -59,6 +65,9 @@ load ../test_helper/testing_base.bash
         return 0 # pacman command exists
       fi
     }
+    function zypper {
+      return 1
+    }
     export -f apt dnf pacman
     run bash -c "echo y | declaro install-config"
     assert_success
@@ -75,6 +84,9 @@ load ../test_helper/testing_base.bash
       return 0
     }
     function pacman {
+      return 1
+    }
+    function zypper {
       return 1
     }
     export -f apt dnf pacman
@@ -95,11 +107,34 @@ load ../test_helper/testing_base.bash
     function pacman {
       return 1
     }
+    function zypper {
+      return 1
+    }
     export -f apt dnf pacman
     run bash -c "echo y | declaro install-config"
     assert_success
     run diff $DECLAROCONFFILE "test/share/declaro/config/apt-config.sh"
     #they are the same
+    assert_success
+}
+
+@test "declaro install-config installs config file for zypper" {
+    function apt {
+      return 1
+    }
+    function dnf {
+      return 1
+    }
+    function pacman {
+      return 1
+    }
+    function zypper {
+      return 0
+    }
+    export -f apt dnf pacman zypper
+    run bash -c "echo y | declaro install-config"
+    assert_success
+    run diff $DECLAROCONFFILE "test/share/declaro/config/zypper-config.sh"
     assert_success
 }
 
@@ -111,6 +146,9 @@ load ../test_helper/testing_base.bash
       return 1
     }
     function pacman {
+      return 1
+    }
+    function zypper {
       return 1
     }
     export -f apt dnf pacman
