@@ -33,14 +33,6 @@ KEEPLISTFILE=${KEEPLISTFILE:-"${ETC_DECLARO_DIR}/packages.list"}
 # Set locale to C to make sort consider '-' and '+' as characters
 export LC_COLLATE=C
 
-function ASSERT_KEEPFILE_EXISTS {
-  if [ ! -f $KEEPLISTFILE ]; then
-    echo "Error: Missing packages.list at \"$KEEPLISTFILE\"." >&2
-    echo "To fix this error, run 'declaro generate' to create a new packages.list." >&2
-    exit 1
-  fi
-}
-
 function parse_keepfile {
   # Remove comments, remove whitespace and remove empty lines, then sort
   sed -e 's/#.*$//' -e 's/[ \t]*//g' -e '/^\s*$/d' $1 | sort

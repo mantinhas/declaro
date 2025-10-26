@@ -12,7 +12,8 @@ function remove_stray {
   STRAY_PKGS=$(get_stray_pkgs | xargs)
 
   if [[ -n $STRAY_PKGS ]]; then
-    echo -e "The following $(echo $STRAY_PKGS | wc -w) package(s) are strayed (installed but not declared in packages.list):\n\t$STRAY_PKGS"
+    STRAY_COUNT=$(echo $STRAY_PKGS | wc -w | awk '{print $1}')
+    echo -e "The following $STRAY_COUNT package(s) are strayed (installed but not declared in packages.list):\n\t$STRAY_PKGS"
     echo -e "Uninstalling..."
     
 
@@ -39,7 +40,8 @@ function install_missing {
   MISSING_PKGS=$(get_missing_pkgs | xargs)
 
   if [[ -n $MISSING_PKGS ]]; then
-    echo -e "The following $(echo $MISSING_PKGS | wc -w) package(s) are missing (declared in packages.list but not installed):\n\t$MISSING_PKGS"
+    MISSING_COUNT=$(echo $MISSING_PKGS | wc -w | awk '{print $1}')
+    echo -e "The following $MISSING_COUNT package(s) are missing (declared in packages.list but not installed):\n\t$MISSING_PKGS"
     echo -e "Installing..."
 
     OUTPUT="$(INSTALL_COMMAND $MISSING_PKGS 2>&1)"
