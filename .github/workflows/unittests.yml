@@ -1,0 +1,54 @@
+name: Run Unit Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  unittests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository (with submodules)
+      uses: actions/checkout@v4
+      with:
+        submodules: true
+
+    - name: Setup Git Global Config for tests
+      run:  |
+        git config --global user.name "Test User"
+        git config --global user.email "test@example.com"
+        git config --global init.defaultBranch main
+        
+    - name: Run Unit tests for "Clean"
+      run: ./test/bats/bin/bats test/test_cases/clean.bats
+      
+    - name: Run Unit tests for "Declare"
+      run: ./test/bats/bin/bats test/test_cases/declare.bats
+      
+    - name: Run Unit tests for "Diff"
+      run: ./test/bats/bin/bats test/test_cases/diff.bats
+      
+    - name: Run Unit tests for "Export"
+      run: ./test/bats/bin/bats test/test_cases/export.bats
+      
+    - name: Run Unit tests for "Generate"
+      run: ./test/bats/bin/bats test/test_cases/generate.bats
+      
+    - name: Run Unit tests for "Import"
+      run: ./test/bats/bin/bats test/test_cases/import.bats
+      
+    - name: Run Unit tests for "Install-config"
+      run: ./test/bats/bin/bats test/test_cases/install-config.bats
+      
+    - name: Run Unit tests for "List"
+      run: ./test/bats/bin/bats test/test_cases/list.bats
+      
+    - name: Run Unit tests for "Status"
+      run: ./test/bats/bin/bats test/test_cases/status.bats
+      
+    - name: Run Unit tests for "Utils"
+      run: ./test/bats/bin/bats test/test_cases/utils.bats
