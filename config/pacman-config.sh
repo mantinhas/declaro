@@ -6,7 +6,7 @@ UNINSTALL_COMMAND () {
 }
 # Command to install a package and its dependencies (no confirm/user prompts)
 INSTALL_COMMAND () {
-  sudo pacman -S --noconfirm $@
+  sudo pacman -S --noconfirm --asexplicit $@
 }
 # Command to list all manually/explicitely installed packages
 LIST_COMMAND () {
