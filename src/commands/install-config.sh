@@ -2,6 +2,7 @@
 
 # HOTFIX: install.config can be called from make and must be path must be adjusted
 SHRBINDIR=${SHRBINDIR:-"$(dirname $BASH_SOURCE)"}
+SHRCONFDIR="${SHRBINDIR}/../config"
 source $SHRBINDIR/utils.sh
 
 #this command is the only declaro subcommand that can also be called from Makefile
@@ -31,7 +32,7 @@ function detect_and_install_config {
       echo "Detected package manager setup: $NAME"
 
       echo "Installing config file $CONFFILE..."
-      ${SUDO} install -Dm644 "config/$CONFFILE" ${ETC_DECLARO_DIR}/config.sh
+      ${SUDO} install -Dm644 "$SHRCONFDIR/$CONFFILE" ${ETC_DECLARO_DIR}/config.sh
       return 0
     fi
   done
