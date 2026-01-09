@@ -6,7 +6,7 @@ Summary:        Declarative wrapper around your package manager
 License:        MIT
 URL:            https://github.com/mantinhas/declaro
 # Adjust branch/tag and filename to match how you create the source tarball
-Source0:        %{url}/archive/refs/heads/main.tar.gz#/declaro-%{version}.tar.gz
+Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildArch:      noarch
 
@@ -28,7 +28,7 @@ manager. It lets you define a clean "reset state" for your system and
 provides tools to keep your system aligned with that state. [page:2]
 
 %prep
-%autosetup -n Nautiterm-%{version}
+%autosetup -n declaro-%{version}
 
 %build
 # Shell scripts only, nothing to build
