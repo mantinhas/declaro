@@ -108,6 +108,8 @@ git clone https://aur.archlinux.org/declaro-git.git && cd declaro-git && makepkg
 
 - For **Fedora**, it's available via COPR: https://copr.fedorainfracloud.org/coprs/xariann/tools/
 
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/xariann/tools/package/declaro/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/xariann/tools/package/declaro/)
+
 Enable the COPR first:
 
 ```bash
