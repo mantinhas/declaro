@@ -5,14 +5,6 @@ ETC_DECLARO_DIR=${ETC_DECLARO_DIR:-"/etc/declaro"}
 DECLAROCONFFILE=${DECLAROCONFFILE:-"${ETC_DECLARO_DIR}/config.sh"}
 SHRDIR=$(realpath "$(dirname $BASH_SOURCE)/../..")
 
-function ASSERT_KEEPFILE_EXISTS {
-  if [ ! -f $KEEPLISTFILE ]; then
-    echo "Error: Missing packages.list at \"$KEEPLISTFILE\"." >&2
-    echo "To fix this error, run 'declaro generate' to create a new packages.list." >&2
-    exit 1
-  fi
-}
-
 function LOAD_DECLAROCONFFILE {
   if [ ! -f "$DECLAROCONFFILE" ] && [ "$DECLAROCONFFILE" = "/etc/declaro/config.sh" ]; then
     echo "Error: Missing config file at \"/etc/declaro/config.sh\"." >&2

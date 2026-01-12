@@ -24,6 +24,7 @@ function main {
     echo "Usage: declare <pkg1> [pkg2...]" >&2
     exit 1
   fi
+  LOAD_DECLAROCONFFILE
   ASSERT_KEEPFILE_EXISTS
   declare $@
 }
