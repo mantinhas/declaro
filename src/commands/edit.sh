@@ -3,4 +3,10 @@
 SHRBINDIR=$(dirname $BASH_SOURCE)
 source $SHRBINDIR/utils.sh
 
-sudoedit $KEEPLISTFILE
+LOAD_DECLAROCONFFILE
+
+if [ -w $KEEPLISTFILE ]; then
+    ${VISUAL:-nano} $KEEPLISTFILE
+else
+    sudoedit $KEEPLISTFILE
+fi
