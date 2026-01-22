@@ -106,6 +106,22 @@ If you would like to help us and add official support for your package manager, 
 git clone https://aur.archlinux.org/declaro-git.git && cd declaro-git && makepkg -si
 ```
 
+- For **Fedora**, it's available via COPR: https://copr.fedorainfracloud.org/coprs/xariann/tools/
+
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/xariann/tools/package/declaro/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/xariann/tools/package/declaro/)
+
+Enable the COPR first:
+
+```bash
+sudo dnf copr enable xariann/tools 
+```
+
+Then install declaro:
+
+```bash
+sudo dnf install declaro
+```
+ 
 ### Manual Installation
 
 1. Make sure you have the following the dependencies installed:
