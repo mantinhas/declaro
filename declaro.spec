@@ -1,6 +1,6 @@
 Name:           declaro
-Version:        1.0.4
-Release:        %autorelease
+Version:        1.0.4^%(date +%Y%m%d)git%(git rev-parse --short HEAD)
+Release:        1%{?dist}
 Summary:        Declarative wrapper around your package manager
 
 License:        MIT
