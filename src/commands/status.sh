@@ -38,8 +38,8 @@ function main {
     echo "Usage: status <pkg1> [pkg2...]" >&2
     exit 1
   fi
-  ASSERT_KEEPFILE_EXISTS
   LOAD_DECLAROCONFFILE
+  ASSERT_KEEPFILE_EXISTS
   status $@
 }
 

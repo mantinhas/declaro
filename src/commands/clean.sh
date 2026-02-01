@@ -59,8 +59,8 @@ function install_missing {
 }
 
 function main {
-  ASSERT_KEEPFILE_EXISTS
   LOAD_DECLAROCONFFILE
+  ASSERT_KEEPFILE_EXISTS
   remove_stray
   printf "\n"
   install_missing
