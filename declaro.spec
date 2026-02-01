@@ -6,7 +6,7 @@ Summary:        Declarative wrapper around your package manager
 License:        MIT
 URL:            https://github.com/mantinhas/declaro
 # Adjust branch/tag and filename to match how you create the source tarball
-Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xariann-pkg/declaro/archive/refs/heads/main.tar.gz
 
 BuildArch:      noarch
 
@@ -28,7 +28,8 @@ manager. It lets you define a clean "reset state" for your system and
 provides tools to keep your system aligned with that state. [page:2]
 
 %prep
-%autosetup -n declaro-%{version}
+# GitHub's "main" branch archive extracts into a folder named "declaro-main"
+%autosetup -n declaro-main
 
 %build
 # Shell scripts only, nothing to build
