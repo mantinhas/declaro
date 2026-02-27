@@ -34,8 +34,8 @@ function ASSERT_KEEPFILE_EXISTS {
 }
 
 function parse_keepfile {
-  # Remove comments, remove whitespace and remove empty lines, then sort
-  sed -e 's/#.*$//' -e 's/[ \t]*//g' -e '/^\s*$/d' $1 | sort
+  # Remove comments, trim lines, convert whitespaces between words into newlines, and remove empty lines, then sort
+  sed -e 's/#.*$//' -e 's/^[ \t\r]*//' -e 's/[ \t\r]*$//' -e 's/[ \t\r]\+/\n/g' -e '/^\s*$/d' $1 | sort
 }
 
 # Prints the packages in one and not the other, and vice-versa
