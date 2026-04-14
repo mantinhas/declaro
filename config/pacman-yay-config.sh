@@ -8,6 +8,7 @@ UNINSTALL_COMMAND () {
 # Command to install a package and its dependencies (no confirm/user prompts)
 INSTALL_COMMAND () {
   yay -S --noconfirm $@
+  sudo pacman -D --asexplicit $@
   # yay does not return error codes on some errors (package not found for example)
   # This is a workaround return error code if the package was not installed
   pacman -Qq $@ > /dev/null 2>&1 || return 1
